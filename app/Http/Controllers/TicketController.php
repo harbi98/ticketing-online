@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +18,8 @@ class TicketController extends Controller
     public function tickets()
     {
         if (Auth::check()) {
-            return view('auth.tickets');
+            $list = Ticket::all();
+            return view('auth.tickets', compact('list'));
         }
         return redirect("login-page")->withSuccess('You are not allowed to access');
     }

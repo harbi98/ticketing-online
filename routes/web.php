@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\PublicController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +29,19 @@ Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 // Pages
 Route::get('sales', [TicketController::class, 'sales'])->name('sales');
 Route::get('tickets', [TicketController::class, 'tickets'])->name('tickets');
+
+
+//Admin Controller
+
+Route::group(['middleware' => ['auth', 'authCheck']], function () {
+    Route::prefix('admin')->group(function () {
+
+        Route::post('/add-ticket', [AdminController::class, 'createTicket'])->name('admin.create.ticket');
+    
+    });
+});
+
+//public
+Route::get('buy-a-ticket', [PublicController::class, 'index'])->name('index.form');
+Route::get('thank-you', [PublicController::class, 'thankYouPage'])->name('index.thank.you.page');
+Route::post('purchased-ticket', [PublicController::class, 'purchaseTicket'])->name('purchased.ticket');

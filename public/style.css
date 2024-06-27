@@ -55,6 +55,7 @@ body,html {
     flex-direction: column;
     padding: 1rem;
 }
+
 .auth-form {
     display: flex;
     width: 100%;
