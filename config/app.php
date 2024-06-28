@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Facade;
+use Barryvdh\DomPDF\Facade as PDF;
 
 return [
 
@@ -195,6 +196,11 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        /* 
+            PDF Service Provider
+        */
+        Barryvdh\DomPDF\ServiceProvider::class,
+
     ],
 
     /*
@@ -209,6 +215,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
+
+
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 

@@ -37,7 +37,6 @@ Route::group(['middleware' => ['auth', 'authCheck']], function () {
     Route::prefix('admin')->group(function () {
 
         Route::post('/add-ticket', [AdminController::class, 'createTicket'])->name('admin.create.ticket');
-    
     });
 });
 
@@ -45,3 +44,8 @@ Route::group(['middleware' => ['auth', 'authCheck']], function () {
 Route::get('buy-a-ticket', [PublicController::class, 'index'])->name('index.form');
 Route::get('thank-you', [PublicController::class, 'thankYouPage'])->name('index.thank.you.page');
 Route::post('purchased-ticket', [PublicController::class, 'purchaseTicket'])->name('purchased.ticket');
+
+Route::post('confirm-ticket', [PublicController::class, 'confirmTicket'])->name('index.confirm.ticket');
+Route::get('/preview-notification', function () {
+    return view('mail.ticket');
+});
