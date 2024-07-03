@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'smtp'),
+    'default' => env('MAIL_MAILER', 'mailgun'),
 
     /*
     |--------------------------------------------------------------------------
@@ -34,6 +34,13 @@ return [
     */
 
     'mailers' => [
+        'mailgun' => [
+            'transport' => 'mailgun',
+            'domain' => env('MAILGUN_DOMAIN'),
+            'secret' => env('MAILGUN_SECRET'),
+            'endpoint' => env('MAILGUN_ENDPOINT', 'api.mailgun.net'),
+            'scheme' => 'https',
+        ],
         'smtp' => [
             'transport' => 'smtp',
             'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
@@ -49,9 +56,6 @@ return [
             'transport' => 'ses',
         ],
 
-        'mailgun' => [
-            'transport' => 'mailgun',
-        ],
 
         'postmark' => [
             'transport' => 'postmark',
@@ -108,10 +112,12 @@ return [
     */
 
     'markdown' => [
-        'theme' => 'default',
+        'theme' => 'ticket-theme',
+
 
         'paths' => [
             resource_path('views/vendor/mail'),
+            resource_path('views/mail'),
         ],
     ],
 
