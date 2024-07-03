@@ -28,7 +28,6 @@ class PublicController extends Controller
         }
         $currentDate = date('y-m-d');
         $ticket_number = 'TBR-GH-PTNM-'.$nextId.'-'.$currentDate;
-        // return $request->all();
         Sales::create([
             'ticket_num' => $ticket_number,
             'ticket_id' => $request->ticketSelect,
