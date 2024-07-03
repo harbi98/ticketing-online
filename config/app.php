@@ -200,6 +200,10 @@ return [
             PDF Service Provider
         */
         Barryvdh\DomPDF\ServiceProvider::class,
+        /*
+        QR Code
+         */
+        SimpleSoftwareIO\QrCode\QrCodeServiceProvider::class
 
     ],
 
@@ -215,7 +219,7 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-
+        'QrCode' => \SimpleSoftwareIO\QrCode\Facades\QrCode::class
 
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),

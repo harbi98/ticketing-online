@@ -45,24 +45,20 @@ class TicketSale extends Mailable
 
         return new Content(
             markdown: 'mail.ticket-sale',
-            with: [
-                'ticket_number' => $this->sale->ticket_num
-            ]
+
         );
     }
     public function build()
     {
+        /*
         $pdf_size = array(0, 0, 400, 700);
         $pdf = PDF::loadView('mail.ticket')->setPaper($pdf_size);
         $ticket_name = $this->sale->ticket_num . '.pdf';
 
         $pdf->save(storage_path($ticket_name));
 
-
-        return $this->markdown('mail.ticket-sale')->attach(storage_path($ticket_name), [
-            'as' => $this->sale->ticket_num . '.pdf',
-            'mime' => 'application/pdf',
-        ]);
+ */
+        return $this->markdown('mail.ticket-sale');
     }
 
     /**

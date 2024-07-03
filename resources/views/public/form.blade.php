@@ -86,11 +86,11 @@
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label text-left">Customer Email</label>
-                <input type="text" class="form-control" id="customer_email" name="customer_email">
+                <input type="email" class="form-control" id="customer_email" name="customer_email">
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label text-left">Customer Contact</label>
-                <input type="number" class="form-control" id="customer_contact" name="customer_contact">
+                <input type="tel" class="form-control" id="customer_contact" name="customer_contact">
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Continue</button>

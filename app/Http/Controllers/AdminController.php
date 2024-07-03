@@ -9,7 +9,8 @@ use Illuminate\Support\Facades\Redirect;
 
 class AdminController extends Controller
 {
-    public function createTicket(Request $request){
+    public function createTicket(Request $request)
+    {
         Ticket::create([
             'ticket_name' => $request->ticket_name,
             'ticket_type' => $request->ticket_type,

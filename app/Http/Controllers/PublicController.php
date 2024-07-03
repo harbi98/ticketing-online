@@ -7,7 +7,11 @@ use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use App\Mail\TicketSale;
+
 use Illuminate\Support\Facades\Mail;
+use Barryvdh\DomPDF\Facade\Pdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Illuminate\Support\Facades\Auth;
 
 class PublicController extends Controller
 {
@@ -33,7 +37,8 @@ class PublicController extends Controller
         }
         $currentDate = date('y-m-d');
         $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate;
-        // return $request->all();
+
+        $ticket = Ticket::find($request->ticket_id);
         $sale =  Sales::create([
             'ticket_num' => $ticket_number,
             'ticket_id' => $request->ticket_id,
@@ -45,8 +50,22 @@ class PublicController extends Controller
 
         // ...
 
-        Mail::to('joviancharles1210@gmail.com')->send(new TicketSale($sale));
+        $mail = new TicketSale($sale);
+
+        $pdf_size = array(0, 0, 349, 573);
+
+        $qrcode = QrCode::size(250)->generate($sale->ticket_num);
+        $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sale', 'qrcode'))->setPaper($pdf_size);
+
+        $mail->attachData($pdf->output(), $sale->ticket_num . '.pdf');
+
+        Mail::to($request->customer_email)->send($mail);
+
+        if (Auth::check()) {
+            return redirect("sales")->withSuccess('Thank you for buying a ticket.');
+        }
         return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
+        //return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
     }
 
 

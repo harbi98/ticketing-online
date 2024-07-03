@@ -14,33 +14,32 @@
       margin: 0;
     }
 
-    body {
-      margin: auto;
-      min-width: fit-content;
-      max-width: 450px;
-    }
+
 
     .wrapper {
       font-family: Helvetica, sans-serif;
       background-color: #48a7c5;
       padding: 2em;
-      width: 400px;
       height: 700px;
 
 
-      border-radius: 10px;
     }
 
     .body {
-      float: center;
+
       background-color: white;
-      padding: 1em;
+      margin: auto auto;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
       width: 95%;
       border-radius: 5px;
 
       overflow: visible;
       height: 95%;
+    }
+
+    .head {
+      min-height: 75px;
+      padding: 1em;
     }
 
     .header {
@@ -50,10 +49,9 @@
     }
 
     .loc-and-age-details {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 1em;
+
       font-size: 15px;
+      margin-bottom: 25px;
     }
 
     .loc {
@@ -64,24 +62,45 @@
       color: rgb(5, 179, 48);
     }
 
+    .separator {
+      width: 150%;
+      height: 50px;
+      display: block;
+      margin: 0 -1.5em;
 
 
-    #left-circle {
-      background-color: #48a7c5;
-      padding: 20px;
-      margin-top: 0;
+
     }
 
+
+
+    .separator>span {
+
+
+      padding: 2px;
+      margin: auto 4px;
+      height: 5px;
+      width: 5px;
+      border-radius: 50%;
+      background-color: #48a7c5;
+      margin-bottom: 13px;
+      display: inline-block;
+    }
+
+    #left-circle,
     #right-circle {
-      background-color: #48a7c5;
-      padding: 20px;
-      margin-top: 0;
+      margin-bottom: 0;
+
+      padding: 15px;
+      color: '#48a7c5';
+
     }
+
 
     .image {
-
+      padding: 0 1em;
       margin: 0 auto;
-
+      height: 250px;
       padding: 0.5em;
       padding-bottom: 2em;
       border-bottom: 1px solid #eeecec;
@@ -92,11 +111,8 @@
       margin-left: 15%;
       width: 250px;
       height: 250px;
+      background-color: gray;
 
-    }
-
-    hr {
-      color: #eeecec;
     }
 
 
@@ -104,21 +120,18 @@
 
 
     .details {
-      display: inline-block;
-      width: 100%;
-      margin: 1em 0;
-      ;
-    }
-
-    .details div:first-of-type {
-      float: left;
+      padding: 0 1em;
+      display: block;
+      min-height: 50px;
     }
 
     .details div:last-of-type {
       float: right;
     }
 
-    .detail>* {}
+    .details div:first-of-type {
+      float: left;
+    }
 
     .title {
       color: gray;
@@ -127,6 +140,19 @@
     .value {
       font-weight: bold;
     }
+
+    .footer {
+      min-height: 50px;
+      width: 100%;
+      border-radius: 0 0 5px 5px;
+
+      background-color: rgb(235, 235, 235);
+    }
+
+    .footer>* {
+      display: inline-block;
+
+    }
   </style>
 </head>
 
@@ -134,43 +160,44 @@
 
   <div class="wrapper">
     <div class="body">
-      <h1 class="header">WACKEN EMTAL BATTLE PHILIPPINES 2024 GRAND FINALS</h1>
-      <div class="loc-and-age-details">
-        <p class="loc">Location: SM City North EDSA Skydome</p>
-        <p class="age">Age: 18+</p>
+      <div class="head">
+        <h1 class="header">{{ $ticket->ticket_name }}</h1>
+        <div class="loc-and-age-details">
+          <p class="loc">Ticket Type: {{$ticket->ticket_type}}</p>
+          <p class="age">{{date('F d, Y', strtotime($sale->created_at)) }}</p>
+        </div>
       </div>
-      <hr>
+      <div class="separator">
+        <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
+      </div>
       <div class="image">
-        <img src="https://via.placeholder.com/150" alt="Image">
+        <img src="data:image/png;base64, {!! base64_encode($qrcode) !!}" alt="QR Code">
       </div>
       <div class="details">
         <div class="detail">
           <p class="title">Entrance code</p>
-          <p class="value">R9R-6GP-CCR</p>
+          <p class="value">{{$sale->ticket_num}}</p>
         </div>
-        <div class="detail">
-          <p class="title">Order Detail</p>
-          <p class="value">D9DD319</p>
-        </div>
+
       </div>
-      <hr>
+      <div class="separator">
+        <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
+      </div>
       <div class="details">
         <div class="detail">
           <p class="title">Ticket Type</p>
-          <p class="value">GEN AD</p>
+          <p class="value">{{$ticket->ticket_type}}</p>
         </div>
         <div class="detail">
-          <p class="title">Price (PHP)</p>
-          <p class="value">D9DD319</p>
+          <p class="title">Price(PHP)</p>
+          <p class="value">{{$ticket->price}}</p>
         </div>
-      </div>
-      <div class="detail">
-        <p class="title">Event Time</p>
-        <li class="value">Sun, June 16, 2024 13:00
 
-        </li>
       </div>
 
+      <div class="footer">
+
+      </div>
     </div>
   </div>
 </body>

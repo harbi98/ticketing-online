@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\PublicController;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,6 +47,3 @@ Route::get('thank-you', [PublicController::class, 'thankYouPage'])->name('index.
 Route::post('purchased-ticket', [PublicController::class, 'purchaseTicket'])->name('purchased.ticket');
 
 Route::post('confirm-ticket', [PublicController::class, 'confirmTicket'])->name('index.confirm.ticket');
-Route::get('/preview-notification', function () {
-    return view('mail.ticket');
-});
