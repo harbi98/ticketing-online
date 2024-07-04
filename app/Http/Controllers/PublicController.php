@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Response;
 
 class PublicController extends Controller
 {
@@ -46,6 +47,7 @@ class PublicController extends Controller
             'customer_address' => $request->customer_address,
             'customer_email' => $request->customer_email,
             'customer_contact' => $request->customer_contact,
+            'status' => 0
         ]);
 
         // ...
@@ -90,7 +92,25 @@ class PublicController extends Controller
             'customer_address' => $request->customer_address,
             'customer_email' => $request->customer_email,
             'customer_contact' => $request->customer_contact,
+            'status' => 0
         ]);
         return view('public.confirm-ticket', compact('sale', 'ticket'));
+    }
+
+    public function scanTicket($ticket_number){
+        if ($ticket_number) {
+           $scan_ticket = Sales::where('ticket_num', $ticket_number)->first();
+
+           if($scan_ticket->status == 1){
+                return response(['message' => 'Ticket has already scanned'], 200);
+           }
+
+           $scan_ticket->status = 1;
+           $scan_ticket->save();
+           return response(['message' => 'Ticket Scanned'], 200);
+
+        }else{
+            return response(['message' => 'No Ticket Number Found'], 404);
+        }
     }
 }

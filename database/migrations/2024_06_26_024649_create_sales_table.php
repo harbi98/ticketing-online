@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('customer_address');
             $table->string('customer_email');
             $table->string('customer_contact');
+            $table->boolean('status');
             $table->foreign('ticket_id')->references('id')->on('tickets')->onDelete('cascade');
             $table->timestamps();
         });

@@ -15,6 +15,7 @@ class Sales extends Model
         'customer_name',
         'customer_address',
         'customer_email',
-        'customer_contact'
+        'customer_contact',
+        'status'
     ];
 }

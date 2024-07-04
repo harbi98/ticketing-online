@@ -47,3 +47,6 @@ Route::get('thank-you', [PublicController::class, 'thankYouPage'])->name('index.
 Route::post('purchased-ticket', [PublicController::class, 'purchaseTicket'])->name('purchased.ticket');
 
 Route::post('confirm-ticket', [PublicController::class, 'confirmTicket'])->name('index.confirm.ticket');
+Route::prefix('scan')->group(function () {
+    Route::get('/ticket/{formNumber}', [PublicController::class, 'scanTicket'])->name('admin.create.ticket');
+});
