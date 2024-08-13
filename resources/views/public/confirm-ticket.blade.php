@@ -77,44 +77,43 @@
 <body>
   <div class="form-container">
     <h5 class="text-center mb-4">Confirm Ticket</h5>
-
     <table class="table">
       <tr>
         <td>Ticket Name:</td>
         <td>
-          <p>{{ $ticket->ticket_name }}</p>
+          <p>{{ $tickets['ticket_name'] }}</p>
         </td>
       </tr>
       <tr>
         <td>Price:</td>
-        <td>₱ {{ $ticket->price}}</td>
+        <td>₱ {{ $tickets['price'] }}</td>
       </tr>
       <tr>
         <td>Customer Name:</td>
-        <td>{{$sale->customer_name}}</td>
+        <td>{{ $sales['customer_name'] }}</td>
 
       </tr>
 
       <tr>
         <td>Customer Address:</td>
-        <td>{{ $sale->customer_address }}</td>
+        <td>{{ $sales['customer_address'] }}</td>
       </tr>
       <tr>
         <td>Customer Email:</td>
-        <td>{{$sale->customer_email}}</td>
+        <td>{{$sales['customer_email']}}</td>
       </tr>
       <tr>
         <td>Customer Contact:</td>
-        <td>{{$sale->customer_contact}}</td>
+        <td>{{$sales['customer_contact']}}</td>
       </tr>
     </table>
     <form method="POST" class="d-flex justify-content-center" action="{{ route('purchased.ticket') }}">
       @csrf
-      <input type="number" name="ticket_id" value={{$ticket->id}} hidden>
-      <input type="text" name="customer_name" value={{$sale->customer_name}} hidden>
-      <input type="text" name="customer_address" value={{$sale->customer_address}} hidden>
-      <input type="text" name="customer_email" value={{$sale->customer_email}} hidden>
-      <input type="text" name="customer_contact" value={{$sale->customer_contact}} hidden>
+      <input type="number" name="ticket_id" value={{$tickets['id']}} hidden>
+      <input type="text" name="customer_name" value={{$sales['customer_name']}} hidden>
+      <input type="text" name="customer_address" value={{$sales['customer_address']}} hidden>
+      <input type="text" name="customer_email" value={{$sales['customer_email']}} hidden>
+      <input type="text" name="customer_contact" value={{$sales['customer_contact']}} hidden>
       <button class="btn btn-primary">Submit</button>
     </form>
   </div>
@@ -129,31 +128,3 @@
 </body>
 
 </html>
-
-<!-- <div class="mb-3 d-flex justify-content-between">
-        <label for="staticEmail" class="form-label">Ticket Name:</label>
-        <p>{{$ticket->ticket_name}}</p>
-      </div>
-      <div class="mb-3 d-flex justify-content-between">
-        <label for="price" class="form-label text-left">Price:</label>
-        <p> {{$ticket->price }}</p>
-      </div>
-      <div class="mb-3 d-flex justify-content-between">
-        <label for="inputPassword" class="form-label text-left">Customer Name:</label>
-        <p>{{ $sale->customer_name }}</p>
-      </div>
-      <div class="mb-3 d-flex justify-content-between">
-        <label for="inputPassword" class="form-label text-left">Customer Address: </label>
-        <p>{{$sale->customer_address}}</p>
-      </div>
-      <div class="mb-3 d-flex justify-content-between">
-        <label for="inputPassword" class="form-label text-left">Customer Email:</label>
-        <p>{{ $sale->customer_email }}</p>
-      </div>
-      <div class="mb-3 d-flex justify-content-between">
-        <label for="inputPassword" class="form-label text-left">Customer Contact: </label>
-        <p>{{ $sale->customer_contact}}</p>
-      </div>
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>  -->

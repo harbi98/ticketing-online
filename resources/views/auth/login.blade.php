@@ -1,7 +1,7 @@
 @extends('layouts')
 @section('content')
 <main class="auth-form">
-    <div class="card" style="width:25rem;">
+    <div class="card w-25">
         <h3 class="card-header text-center">Login</h3>
         <div class="card-body">
             <form method="POST" action="{{ route('login') }}">
@@ -33,7 +33,7 @@
                     </div>
                 </div>
                 <div class="d-grid mx-auto">
-                    <button type="submit" class="btn btn-dark btn-block">Signin</button>
+                    <button type="submit" class="btn btn-outline-dark btn-block">Sign in</button>
                 </div>
             </form>
         </div>

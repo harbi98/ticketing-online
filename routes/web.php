@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth', 'authCheck']], function () {
 Route::get('buy-a-ticket', [PublicController::class, 'index'])->name('index.form');
 Route::get('thank-you', [PublicController::class, 'thankYouPage'])->name('index.thank.you.page');
 Route::post('purchased-ticket', [PublicController::class, 'purchaseTicket'])->name('purchased.ticket');
+Route::get('purchase-confirmation', [PublicController::class, 'purchaseConfirm'])->name('purchased.confirm');
 
 Route::post('confirm-ticket', [PublicController::class, 'confirmTicket'])->name('index.confirm.ticket');
 Route::prefix('scan')->group(function () {
