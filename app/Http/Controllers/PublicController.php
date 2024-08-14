@@ -18,6 +18,9 @@ use Illuminate\Http\Response;
 
 class PublicController extends Controller
 {
+    public function homepage(){
+        return view('auth.landing');
+    }
     public function index()
     {
         $tickets = Ticket::all();

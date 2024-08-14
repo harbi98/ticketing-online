@@ -8,8 +8,13 @@ body,html {
 .main {
     display: flex;
     flex-direction: column;
-    height: 100vh;
+    overflow: auto;
+    /* height: 100; */
+    /* background-image: url(assets/landing-page.png);
+    background-position: center;
+    background-size: cover; */
 }
+
 .page-container {
     display: flex;
     height: 100%;
@@ -64,25 +69,23 @@ body,html {
     flex-direction: column;
 }
 
-.gradient-custom-2 {
-    /* fallback for old browsers */
-    background: #fccb90;
-    
-    /* Chrome 10-25, Safari 5.1-6 */
-    background: -webkit-linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
-    
-    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-    background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593);
+.social-links .dots{
+	width: 36px;
+	height: 36px;
+	background-color: white;
+	border-radius: 100%;
+	margin-right: 10px;
 }
-    
-@media (min-width: 768px) {
-    .gradient-form {
-    height: 100vh !important;
-    }
+
+.social-links .icons{
+	font-size: 20px;
+    line-height: 38px;
+	color: #909090;
 }
-@media (min-width: 769px) {
-    .gradient-custom-2 {
-    border-top-right-radius: .3rem;
-    border-bottom-right-radius: .3rem;
-    }
+
+.bgin{
+    background-image: url(assets/landing-page.png);
+    background-position: center;
+    background-size: cover;
+    height: 100vh;
 }
