@@ -84,8 +84,8 @@ body,html {
 }
 
 .bgin{
-    background-image: url('assets/landing-page.png');
-    background-position: center;
+    /* background-image: "{{ URL::asset('style.css') }}"; */
+    /* background-position: center;
     background-size: cover;
-    height: 100vh;
+    height: 100vh; */
 }

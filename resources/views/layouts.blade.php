@@ -5,7 +5,7 @@
     <title>Ticketing Online</title>
     {{--
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
-    <link href="{{ asset('style.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ URL::asset('style.css') }}" rel="stylesheet" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
@@ -15,7 +15,7 @@
 
 <body>
     <div class="main">
-        <div class="bgin">
+        <div class="bgin" style="background-image: url('{{ asset('assets/landing-page.png')}}'); background-position: center; background-size: cover; height: 100vh;">
         <!-- <nav class="navbar navbar-expand-xl mt-4">
             <div class="container-fluid">
                 <div class="social-links">
