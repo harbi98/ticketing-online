@@ -49,7 +49,6 @@ class PublicController extends Controller
             'ticket_num' => $ticket_number,
             'ticket_id' => $request->ticket_id,
             'customer_name' => $request->customer_name,
-            'customer_address' => $request->customer_address,
             'customer_email' => $request->customer_email,
             'customer_contact' => $request->customer_contact,
             'status' => 0

@@ -99,10 +99,6 @@
         <td>{{ $sales['customer_address'] }}</td>
       </tr>
       <tr>
-        <td>Customer Email:</td>
-        <td>{{$sales['customer_email']}}</td>
-      </tr>
-      <tr>
         <td>Customer Contact:</td>
         <td>{{$sales['customer_contact']}}</td>
       </tr>
@@ -112,9 +108,8 @@
       <input type="number" name="ticket_id" value={{$tickets['id']}} hidden>
       <input type="text" name="customer_name" value={{$sales['customer_name']}} hidden>
       <input type="text" name="customer_address" value={{$sales['customer_address']}} hidden>
-      <input type="text" name="customer_email" value={{$sales['customer_email']}} hidden>
       <input type="text" name="customer_contact" value={{$sales['customer_contact']}} hidden>
-      <button class="btn btn-primary">Submit</button>
+      <button class="btn btn-primary">Continue</button>
     </form>
   </div>
   <div class="footer-text">

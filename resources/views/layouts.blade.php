@@ -5,7 +5,8 @@
     <title>Ticketing Online</title>
     <meta http-equiv="cache-control" content="max-age=0" />
     <meta http-equiv="cache-control" content="no-cache" />
-    {{--<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+    {{--
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     <link href="{{ URL::asset('style.css') }}" rel="stylesheet" type="text/css">
     <!-- <link href="{{ URL::asset('app.js') }}" defer rel="script"> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -14,8 +15,7 @@
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
 </head>
 
 <body>
@@ -75,10 +75,19 @@
                     </div>
                     <nav>
                         <ul class="nav">
-                            <li class="nav-item"><a href="#" class="nav-link text-white">Home</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link text-white">Artists</a></li>
-                            <li class="nav-item"><a href="#" class="nav-link text-white">About Event</a></li>
-                            <li class="nav-item"><a href="{{ route('index.form') }}" class="btn btn-outline-light">Buy Tickets</a></li>
+                            @guest
+                                <li class="nav-item"><a href="#" class="nav-link text-white">Home</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link text-white">Artists</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link text-white">About Event</a></li>
+                                <li class="nav-item"><a href="{{ route('index.form') }}" class="btn btn-outline-light">Buy Tickets</a></li>
+                            @else
+                                <li class="nav-item">
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="logout-button btn btn-outline-danger">Logout</button>
+                                    </form>
+                                </li>
+                            @endguest
                         </ul>
                     </nav>
                 </div>

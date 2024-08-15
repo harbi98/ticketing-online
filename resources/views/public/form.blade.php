@@ -65,7 +65,7 @@
             @csrf
             <div class="mb-3">
                 <label for="staticEmail" class="form-label">Select Tickets</label>
-                <select class="form-select" id="ticketSelect" name="ticketSelect" aria-label="Default select example">
+                <select class="form-select" id="ticketSelect" name="ticketSelect" aria-label="Default select example" required>
                     <option selected>Select a Ticket</option>
                     @foreach ($tickets as $ticket)
                     <option value="{{ $ticket->id }}" data-price="{{ $ticket->price }}">{{ $ticket->ticket_name }}</option>
@@ -77,20 +77,16 @@
                 <input type="number" readonly class="form-control" id="price" name="price">
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label text-left">Customer Name</label>
-                <input type="text" class="form-control" id="customer_name" name="customer_name">
+                <label for="inputPassword" class="form-label text-left">Full Name</label>
+                <input type="text" class="form-control" id="customer_name" name="customer_name" required>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label text-left">Customer Address</label>
-                <input type="text" class="form-control" id="customer_address" name="customer_address">
+                <label for="inputPassword" class="form-label text-left">Email</label>
+                <input type="email" class="form-control" id="customer_email" name="customer_email" required>
             </div>
             <div class="mb-3">
-                <label for="inputPassword" class="form-label text-left">Customer Email</label>
-                <input type="email" class="form-control" id="customer_email" name="customer_email">
-            </div>
-            <div class="mb-3">
-                <label for="inputPassword" class="form-label text-left">Customer Contact</label>
-                <input type="tel" class="form-control" id="customer_contact" name="customer_contact">
+                <label for="inputPassword" class="form-label text-left">Contact Number</label>
+                <input type="tel" class="form-control" id="customer_contact" name="customer_contact" required>
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Continue</button>
