@@ -147,7 +147,7 @@ class PublicController extends Controller
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
-                    'Authorization' => 'Basic ' . base64_encode('sk_test_1pGfPypxzvttSjzzKhJ2pjaj' . ':'),
+                    'Authorization' => 'Basic ' . base64_encode('sk_test_JktT2eXzzLLo43HuhqErP7Vj' . ':'),
                 ],
             ]);
             $responseBody = json_decode($response->getBody(), true);
