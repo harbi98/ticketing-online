@@ -126,7 +126,6 @@ footer {
 .event-section {
     height: 100vh;
     margin-top: -20vh; 
-    /* background-image: url("public/assets/vector-filter.png"); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

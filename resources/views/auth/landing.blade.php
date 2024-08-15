@@ -25,19 +25,19 @@
     <section class="container-fluid event-section" style="background-image: url('{{asset('assets/vector-filter.png')}}')">
         <div class="container text-center" style="margin-top: 30vh;">
             <div class="row justify-content-center">
-                <div class="col-12 display-1">
+                <div class="col-sm-12 display-1">
                     <img src="{{ asset('assets/second-main-text.png') }}"></img>
                 </div>
             </div>
             <div class="row mt-5 align-items-center">
-                <div class="col logos">
+                <div class="col-sm-2 logos">
                     <img src="assets/image1.png" alt="Logo 1" class="img-fluid mx-2">
                     <img src="assets/image2.png" alt="Logo 2" class="img-fluid mx-2">
                     <img src="assets/image3.png" alt="Logo 3" class="img-fluid mx-2">
                 </div>
-                <div class="col text-white">
+                <div class="col-sm-2 text-white">
                     <p class="presented-by mb-1">Presented by:</p>
-                    <p class="presenters mb-4">Presented by:<br>
+                    <p class="presenters mb-4">
                         SR PRODUCTION IN PARTNERSHIP<br>
                         WITH INK THAT RIGHT TATTOO STUDIO,<br>
                         ARKI VENTURE MUSIC PRODUCTION, MEDIAONE
