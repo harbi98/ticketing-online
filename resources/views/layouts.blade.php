@@ -17,7 +17,7 @@
 
 <body>
     <div class="main">
-        <div class="bgin">
+        <div class="bgin" style="background-image: url('{{ URL::asset('assets/index.jpeg') }}');">
             <!-- <nav class="navbar navbar-expand-xl navbar-dark mt-4">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">

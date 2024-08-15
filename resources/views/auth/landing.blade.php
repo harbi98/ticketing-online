@@ -26,7 +26,7 @@
         <div class="container text-center" style="margin-top: 30vh;">
             <div class="row justify-content-center">
                 <div class="col-12 display-1">
-                    <img src="assets/second-main-text.png"></img>
+                    <img src="{{ asset('assets/second-main-text.png') }}"></img>
                 </div>
             </div>
             <div class="row mt-5 align-items-center">

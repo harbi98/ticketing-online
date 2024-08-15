@@ -90,7 +90,7 @@ body,html {
 .bgin{
     height: 100vh;
     background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), /* Faded black overlay */
-    url("../assets/index.jpeg");
+    url("public/assets/index.jpeg");
     background-position: 0px 69%;
     background-size: cover;
 }
