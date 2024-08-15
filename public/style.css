@@ -2,17 +2,18 @@ body,html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background-color: #0d0d0f;
+    background: #0d0d0f;
 }
 * {
     box-sizing: border-box;
-    background-color: #0d0d0f;
+    /* background-color: #0d0d0f; */
 }
 .main {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    background-color: #0d0d0f;
+    background: #0d0d0f;
+    /* background-color: #0d0d0f; */
 }
 
 .page-container {
@@ -69,7 +70,7 @@ body,html {
     url("public/assets/index.jpeg");
     background-position: 0px 69%;
     background-size: cover;
-    background-color: #0d0d0f;
+    /* background-color: #0d0d0f; */
 }
 
 .hero::before {
@@ -125,7 +126,7 @@ footer {
 .event-section {
     height: 100vh;
     margin-top: -20vh; 
-    background-image: url('public/assets/Vector.png');
+    /* background-image: url("public/assets/vector-filter.png"); */
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

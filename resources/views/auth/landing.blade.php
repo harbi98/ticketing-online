@@ -11,8 +11,8 @@
                     <img src="{{asset('assets/sub-text.png')}}" height="35"></img>
                 </div>
                 <div class="d-flex justify-content-center gap-3 mt-5">
-                    <a href="#" class="btn btn-outline-light bg-black text-white btn-lg w-25 rounded-0">Learn More</a>
-                    <a href="{{ route('index.form') }}" class="btn btn-light btn-lg rounded-0">Buy Tickets & VIP</a>
+                    <a href="#" class="btn btn-outline-light bg-black text-white btn-lg w-25 rounded-0" style="z-index: 1">Learn More</a>
+                    <a href="{{ route('index.form') }}" class="btn btn-light btn-lg rounded-0" style="z-index: 1">Buy Tickets & VIP</a>
                 </div>
             </div>
         </main>
@@ -22,7 +22,7 @@
             <img src="{{asset('assets/bands.png')}}" class="img-fluid bands-img w-100" height="100"></img>
         </div>
     </section>
-    <section class="container-fluid event-section">
+    <section class="container-fluid event-section" style="background-image: url('{{asset('assets/vector-filter.png')}}')">
         <div class="container text-center" style="margin-top: 30vh;">
             <div class="row justify-content-center">
                 <div class="col-12 display-1">
