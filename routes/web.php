@@ -18,7 +18,7 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 |
 */
 
-Route::redirect('/', '/landing');
+Route::redirect('/', '/october-metal-mayhem');
 
 // Auth
 Route::get('dashboard', [AuthController::class, 'dashboard'])->name('dashboard');
@@ -43,7 +43,7 @@ Route::group(['middleware' => ['auth', 'authCheck']], function () {
 });
 
 //public
-Route::get('landing', [PublicController::class, 'homepage'])->name('homepage.form');
+Route::get('october-metal-mayhem', [PublicController::class, 'homepage'])->name('homepage.form');
 Route::get('buy-a-ticket', [PublicController::class, 'index'])->name('index.form');
 Route::get('thank-you', [PublicController::class, 'thankYouPage'])->name('index.thank.you.page');
 Route::post('purchased-ticket', [PublicController::class, 'purchaseTicket'])->name('purchased.ticket');
