@@ -10,40 +10,14 @@ body,html {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    background-color: black;
+    background-color: #0d0d0f;
 }
 
 .page-container {
     display: flex;
     height: 100%;
 }
-.sidebar {
-    margin: 0;
-    padding: 0;
-    width: 250px;
-    background-color: #f1f1f1;
-    height: 100%;
-    overflow: auto;
-}
 
-.sidebar a {
-    display: block;
-    color: black;
-    padding: 16px;
-    text-decoration: none;
-    margin: 1rem;
-    border-radius: 0.2rem;
-}
-
-.sidebar a.active {
-    background-color: #04AA6D;
-    color: white;
-}
-
-.sidebar a:hover:not(.active) {
-    background-color: #555;
-    color: white;
-}
 .logout-button {
     background: none;
 	color: inherit;
@@ -89,7 +63,7 @@ body,html {
 
 .bgin{
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), /* Faded black overlay */
+    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
     url("public/assets/index.jpeg");
     background-position: 0px 69%;
     background-size: cover;
