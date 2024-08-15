@@ -77,6 +77,10 @@
                 <input type="number" readonly class="form-control" id="price" name="price">
             </div>
             <div class="mb-3">
+                <label for="quantity" class="form-label text-left">Quantity</label>
+                <input type="number" class="form-control" id="quantity" name="customer_quantity" required>
+            </div>
+            <div class="mb-3">
                 <label for="inputPassword" class="form-label text-left">Full Name</label>
                 <input type="text" class="form-control" id="customer_name" name="customer_name" required>
             </div>

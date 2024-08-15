@@ -13,7 +13,7 @@ class Sales extends Model
         'ticket_num',
         'ticket_id',
         'customer_name',
-        'customer_address',
+        'customer_quantity',
         'customer_email',
         'customer_contact',
         'status'

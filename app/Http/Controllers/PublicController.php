@@ -49,12 +49,36 @@ class PublicController extends Controller
             'ticket_num' => $ticket_number,
             'ticket_id' => $request->ticket_id,
             'customer_name' => $request->customer_name,
+            'customer_quantity' => $request->customer_quantity,
             'customer_email' => $request->customer_email,
             'customer_contact' => $request->customer_contact,
             'status' => 0
         ]);
 
         // ...
+        // $mail = new TicketSale($sale);
+
+        // $pdf_size = array(0, 0, 349, 573);
+
+        // $ticket_quantity = $request->customer_quantity;
+        // $ticket2 = [];
+        // for ($i = 1; $i <= $ticket_quantity; $i++) {
+        //     $ticket_num2 = $sale->ticket_num . '-' . $i;
+        //     $qrcode = QrCode::size(250)->generate($ticket_num2);
+        //     $ticket2 = [
+        //         'ticket_num' => $ticket_num2,
+        //         'ticket_name' => $ticket->ticket_name,
+        //         'ticker_type' => $ticket->ticket_type,
+        //         'ticket_price' => $ticket->price
+        //     ];
+        //     $sale2 = [
+        //         'created_at' => $sale->created_at,
+        //     ];
+        //     $pdf2 = PDF::loadView('mail.ticket', compact('ticket2', 'sale2', 'qrcode'))->setPaper($pdf_size);
+        //     $mail->attachData($pdf2->output(), $ticket_num2 . '.pdf');
+
+        //     Mail::to($request->customer_email)->send($mail);
+        // }
 
         $mail = new TicketSale($sale);
 
@@ -66,9 +90,9 @@ class PublicController extends Controller
         $mail->attachData($pdf->output(), $sale->ticket_num . '.pdf');
 
         Mail::to($request->customer_email)->send($mail);
-
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
+
         }
         // return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
         return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
@@ -87,27 +111,19 @@ class PublicController extends Controller
         $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate;
         $ticket = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
 
-
         $sale = Sales::make([
             'ticket_num' => $ticket_number,
             'ticket_id' => $request->ticketSelect,
             'customer_name' => $request->customer_name,
-            'customer_address' => $request->customer_address,
+            'customer_quantity' => $request->customer_quantity,
             'customer_email' => $request->customer_email,
             'customer_contact' => $request->customer_contact,
             'status' => 0
         ]);
 
-        $total_price = round($ticket->price) . '00';
-        // $items = [
-        //     'customer_name' => $request->customer_name,
-        //     'customer_email' => $request->customer_email,
-        //     'customer_contact' => $request->customer_contact,
-        //     'ticket_price' => $total_price,
-        //     'ticket_name' => $ticket->ticket_name
-        // ];
-
-        // return view('public.confirm-ticket', compact('sale', 'ticket'));
+        $price_ticket = round($ticket->price);
+        // $total_price = intval($tprice) * intval($sale->customer_quantity);
+        $final_price = strval($price_ticket) . '00';
 
         $encryptedSale = Crypt::encryptString($sale);
         $encryptedTicket = Crypt::encryptString($ticket);
@@ -129,10 +145,10 @@ class PublicController extends Controller
                     "line_items" => [
                         [
                             "currency" => "PHP",
-                            "amount" => intval($total_price),
+                            "amount" => intval($final_price),
                             "description" => 'Ticket Item',
                             "name" => $ticket->ticket_name,
-                            "quantity" => 1
+                            "quantity" => intval($request->customer_quantity)
                         ]
                     ],
                     "success_url" => url('purchase-confirmation?sale=' . $encryptedSale . '&ticket=' . $encryptedTicket)

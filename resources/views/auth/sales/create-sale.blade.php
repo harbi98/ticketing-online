@@ -32,10 +32,6 @@
             <input type="text" class="form-control" id="customer_name" name="customer_name">
           </div>
           <div class="mb-3">
-            <label for="inputPassword" class="form-label text-left">Customer Address</label>
-            <input type="text" class="form-control" id="customer_address" name="customer_address">
-          </div>
-          <div class="mb-3">
             <label for="inputPassword" class="form-label text-left">Customer Email</label>
             <input type="email" class="form-control" id="customer_email" name="customer_email">
           </div>

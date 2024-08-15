@@ -91,12 +91,14 @@
       <tr>
         <td>Customer Name:</td>
         <td>{{ $sales['customer_name'] }}</td>
-
       </tr>
-
       <tr>
-        <td>Customer Address:</td>
-        <td>{{ $sales['customer_address'] }}</td>
+        <td>Ticket Quantities:</td>
+        <td>x {{ $sales['customer_quantity'] }}</td>
+      </tr>
+      <tr>
+        <td>Customer Email:</td>
+        <td>{{$sales['customer_email']}}</td>
       </tr>
       <tr>
         <td>Customer Contact:</td>
@@ -107,7 +109,8 @@
       @csrf
       <input type="number" name="ticket_id" value={{$tickets['id']}} hidden>
       <input type="text" name="customer_name" value={{$sales['customer_name']}} hidden>
-      <input type="text" name="customer_address" value={{$sales['customer_address']}} hidden>
+      <input type="number" name="customer_quantity" value={{$sales['customer_quantity']}} hidden>
+      <input type="text" name="customer_email" value={{$sales['customer_email']}} hidden>
       <input type="text" name="customer_contact" value={{$sales['customer_contact']}} hidden>
       <button class="btn btn-primary">Continue</button>
     </form>
