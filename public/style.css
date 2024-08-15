@@ -3,6 +3,7 @@ body,html {
     padding: 0;
     overflow-x: hidden;
     background-color: #0d0d0f;
+    scroll-behavior: smooth;
 }
 * {
     box-sizing: border-box;
@@ -19,6 +20,11 @@ body,html {
 .page-container {
     display: flex;
     height: 100%;
+}
+
+.nav-custom{
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .logout-button {
@@ -66,8 +72,8 @@ body,html {
 
 .bgin{
     height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), 
-    url("public/assets/index.jpeg");
+    /* background-image: linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 1)), 
+    url("public/assets/index.jpeg"); */
     background-position: 0px 69%;
     background-size: cover;
     /* background-color: #0d0d0f; */

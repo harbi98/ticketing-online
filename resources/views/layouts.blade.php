@@ -20,7 +20,7 @@
 
 <body>
     <div class="main">
-        <div class="bgin" style="background-image: url('{{ URL::asset('assets/index.jpeg') }}');">
+        <div class="bgin" style="background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{ URL::asset('assets/index.jpeg') }}');">
             <!-- <nav class="navbar navbar-expand-xl navbar-dark mt-4">
             <div class="container-fluid">
                 <a class="navbar-brand" href="#">
@@ -66,7 +66,7 @@
                 </div>
             </div>
         </nav> -->
-            <header class="text-white py-3">
+            <header class="text-white py-3 fixed-top">
                 <div class="container d-flex justify-content-between align-items-center">
                     <div class="social-icons d-flex gap-3">
                         <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
@@ -74,12 +74,12 @@
                         <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
                     </div>
                     <nav>
-                        <ul class="nav">
+                        <ul class="nav nav-custom text-center">
                             @guest
-                                <li class="nav-item"><a href="#" class="nav-link text-white">Home</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link text-white">Artists</a></li>
-                                <li class="nav-item"><a href="#" class="nav-link text-white">About Event</a></li>
-                                <li class="nav-item"><a href="{{ route('index.form') }}" class="btn btn-outline-light">Buy Tickets</a></li>
+                                <li class="nav-item"><a href="#" class="nav-link text-white">HOME</a></li>
+                                <li class="nav-item"><a href="#artists" class="nav-link text-white">ARTISTS</a></li>
+                                <li class="nav-item"><a href="#about-event" class="nav-link text-white">ABOUT EVENT</a></li>
+                                <li class="nav-item"><a href="{{ route('index.form') }}" class="btn btn-outline-light rounded-0 bg-black">Buy Tickets</a></li>
                             @else
                                 <li class="nav-item">
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">
