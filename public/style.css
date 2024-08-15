@@ -2,7 +2,7 @@ body,html {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
-    background: #0d0d0f;
+    background-color: #0d0d0f;
 }
 * {
     box-sizing: border-box;
@@ -12,7 +12,7 @@ body,html {
     display: flex;
     flex-direction: column;
     overflow-y: scroll;
-    background: #0d0d0f;
+    background-color: #0d0d0f;
     /* background-color: #0d0d0f; */
 }
 
