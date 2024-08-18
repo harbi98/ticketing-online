@@ -20,8 +20,8 @@
         </main>
     </section>
     <section id="artists">
-        <div class="container-fluid p-0" style="margin-top: -30vh">
-            <img src="{{asset('assets/bands.png')}}" class="img-fluid bands-img w-100" height="100"></img>
+        <div class="container-fluid p-0" style="margin-top: -35vh;">
+            <img src="{{asset('assets/bands.png')}}" class="img-fluid bands-img w-100" height="auto"></img>
         </div>
     </section>
     <section id="about-event" class="container-fluid event-section"
@@ -65,39 +65,9 @@
                 </div>
             </div>
 
-            <!-- <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <p class="presented-by mb-1">Presented by:</p>
-                    <p class="presenters mb-4">
-                        SR PRODUCTION IN PARTNERSHIP<br>
-                        WITH INK THAT RIGHT TATTOO STUDIO,<br>
-                        ARKI VENTURE MUSIC PRODUCTION, MEDIAONE
-                    </p>
-                    <div class="logos d-flex justify-content-center mb-5">
-                        <img src="assets/image1.png" alt="Logo 1" class="img-fluid mx-2">
-                        <img src="assets/image2.png" alt="Logo 2" class="img-fluid mx-2">
-                        <img src="assets/image3.png" alt="Logo 3" class="img-fluid mx-2">
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <p class="venue mb-1">Venue:</p>
-                    <p class="event-date">
-                        Saturday, 26th October 2024<br>
-                        @ Almendras Gym Davao City
-                    </p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <a href="#" class="btn btn-outline-light btn-lg">Buy Tickets & VIP Now</a>
-                </div>
-            </div> -->
         </div>
     </section>
-    <section id="contact-us" class="container-fluid contact-section"
-        style="background-image: url('{{asset('assets/bottom-mask.png')}}')">
+    <section id="contact-us" class="container-fluid contact-section" style="background-image: url('{{asset('assets/bottom-mask.png')}}')">
         <div class="container" style="margin-top: 25vh;">
             <div class="row text-center justify-content-center">
                 <div class="col-12 display-1">
@@ -105,7 +75,6 @@
                 </div>
                 <div class="container-fluid text-white">
                     <div class="row justify-content-center align-items-start">
-                        <!-- Contact Us Column -->
                         <div class="col-md-5 col-lg-3 text-center mb-4">
                             <p class="presented-by mb-3"><b>CONTACT US</b></p>
                             <div class="d-grid gap-3">
@@ -114,7 +83,6 @@
                                 <a href="#" class="btn btn-outline-light bg-black w-100 rounded-0 py-2" href="#">SEND MESSAGE</a>
                             </div>
                         </div>
-                        <!-- Follow Us Column -->
                         <div class="col-md-5 col-lg-3 text-center">
                             <p class="presented-by mb-3"><b>FOLLOW US</b></p>
                             <div class="d-grid gap-3">
@@ -128,5 +96,37 @@
             </div>
         </div>
     </section>
+    <section class="bg-black w-100 border-top border-5" style="margin-top: -20vh; z-index: 1">
+        <div class="container-fluid bg-transparent w-75">
+            <div class="row py-3">
+                <div class="col-md-6 d-flex justify-content-start align-items-center">
+                    <div class="social-icons d-flex gap-3">
+                        <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-white"><i class="bi bi-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <div class="nav-links d-flex gap-4">
+                        <a href="#" class="nav-link text-white">HOME</a>
+                        <a href="#artists" class="nav-link text-white">ARTISTS</a>
+                        <a href="#about-event" class="nav-link text-white">ABOUT EVENT</a>
+                        <a href="#contact" class="nav-link text-white">CONTACT</a>
+                    </div>
+                </div>
+            </div>
+            <hr class="border border-5 w-75 mx-auto">
+            <div class="row py-4">
+                <div class="col-md-6 d-flex justify-content-start align-items-center">
+                    <p class="text-white" style="font-size: 1rem; font-family: 'CustomFont', sans-serif;">OCTOBER METAL MAYHEM</p>
+                </div>
+                <div class="col-md-6 d-flex justify-content-end align-items-center">
+                    <a href="#" class="btn btn-outline-light bg-black rounded-0">BUY TICKETS & VIP NOW</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
 </main>
 @endsection

@@ -63,22 +63,24 @@
         <h5 class="text-center mb-4">Buy a Ticket</h5>
         <form method="POST" action="{{ route('index.confirm.ticket') }}">
             @csrf
-            <div class="mb-3">
-                <label for="staticEmail" class="form-label">Select Tickets</label>
-                <select class="form-select" id="ticketSelect" name="ticketSelect" aria-label="Default select example" required>
-                    <option selected>Select a Ticket</option>
-                    @foreach ($tickets as $ticket)
-                    <option value="{{ $ticket->id }}" data-price="{{ $ticket->price }}">{{ $ticket->ticket_name }}</option>
-                    @endforeach
-                </select>
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label for="staticEmail" class="form-label">Select Tickets</label>
+                    <select class="form-select" id="ticketSelect" name="ticketSelect" aria-label="Default select example" required>
+                        <option selected>Select a Ticket</option>
+                        @foreach ($tickets as $ticket)
+                        <option value="{{ $ticket->id }}" data-price="{{ $ticket->price }}">{{ $ticket->ticket_name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+                <div class="col-md-6">
+                    <label for="quantity" class="form-label text-left">Quantity</label>
+                    <input type="number" class="form-control" id="quantity" name="customer_quantity" required>
+                </div>
             </div>
             <div class="mb-3">
                 <label for="price" class="form-label text-left">Price</label>
                 <input type="number" readonly class="form-control" id="price" name="price">
-            </div>
-            <div class="mb-3">
-                <label for="quantity" class="form-label text-left">Quantity</label>
-                <input type="number" class="form-control" id="quantity" name="customer_quantity" required>
             </div>
             <div class="mb-3">
                 <label for="inputPassword" class="form-label text-left">Full Name</label>
@@ -97,6 +99,7 @@
             </div>
         </form>
     </div>
+
     <div class="footer-text">
         Powered by MediaOne Software Solutions
     </div>

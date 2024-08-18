@@ -157,49 +157,47 @@
 </head>
 
 <body>
-
-  <div class="wrapper">
-    <div class="body">
-      <div class="head">
-        <h1 class="header">{{ $ticket->ticket_name }}</h1>
-        <div class="loc-and-age-details">
-          <p class="loc">Ticket Type: {{$ticket->ticket_type}}</p>
-          <p class="age">{{date('F d, Y', strtotime($sale->created_at)) }}</p>
+  @foreach ($sales as $sale)
+    <div class="wrapper">
+      <div class="body">
+        <div class="head">
+          <h1 class="header">{{ $sale['ticket_name'] }}</h1>
+          <div class="loc-and-age-details">
+            <p class="loc">Ticket Type: {{ $sale['ticket_type'] }}</p>
+            <p class="age">{{ date('F d, Y', strtotime($sale['sales_date'])) }}</p>
+          </div>
         </div>
-      </div>
-      <div class="separator">
-        <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
-      </div>
-      <div class="image">
-        <img src="data:image/png;base64, {!! base64_encode($qrcode) !!}" alt="QR Code">
-      </div>
-      <div class="details">
-        <div class="detail">
-          <p class="title">Entrance code</p>
-          <p class="value">{{$sale->ticket_num}}</p>
+        <div class="separator">
+          <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
+        </div>
+        <div class="image">
+          <img src="data:image/png;base64, {!! base64_encode($sale['qrcode']) !!}" alt="QR Code">
+        </div>
+        <div class="details">
+          <div class="detail">
+            <p class="title">Entrance code</p>
+            <p class="value">{{ $sale['ticket_num'] }}</p>
+          </div>
+        </div>
+        <div class="separator">
+          <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
+        </div>
+        <div class="details">
+          <div class="detail">
+            <p class="title">Ticket Type</p>
+            <p class="value">{{ $sale['ticket_type'] }}</p>
+          </div>
+          <div class="detail">
+            <p class="title">Price(PHP)</p>
+            <p class="value">{{ $sale['ticket_price'] }}</p>
+          </div>
         </div>
 
-      </div>
-      <div class="separator">
-        <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
-      </div>
-      <div class="details">
-        <div class="detail">
-          <p class="title">Ticket Type</p>
-          <p class="value">{{$ticket->ticket_type}}</p>
+        <div class="footer">
         </div>
-        <div class="detail">
-          <p class="title">Price(PHP)</p>
-          <p class="value">{{$ticket->price}}</p>
-        </div>
-
-      </div>
-
-      <div class="footer">
-
       </div>
     </div>
-  </div>
+  @endforeach
 </body>
 
 </html>

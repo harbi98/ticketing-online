@@ -56,40 +56,40 @@ class PublicController extends Controller
         ]);
 
         // ...
-        // $mail = new TicketSale($sale);
-
-        // $pdf_size = array(0, 0, 349, 573);
-
-        // $ticket_quantity = $request->customer_quantity;
-        // $ticket2 = [];
-        // for ($i = 1; $i <= $ticket_quantity; $i++) {
-        //     $ticket_num2 = $sale->ticket_num . '-' . $i;
-        //     $qrcode = QrCode::size(250)->generate($ticket_num2);
-        //     $ticket2 = [
-        //         'ticket_num' => $ticket_num2,
-        //         'ticket_name' => $ticket->ticket_name,
-        //         'ticker_type' => $ticket->ticket_type,
-        //         'ticket_price' => $ticket->price
-        //     ];
-        //     $sale2 = [
-        //         'created_at' => $sale->created_at,
-        //     ];
-        //     $pdf2 = PDF::loadView('mail.ticket', compact('ticket2', 'sale2', 'qrcode'))->setPaper($pdf_size);
-        //     $mail->attachData($pdf2->output(), $ticket_num2 . '.pdf');
-
-        //     Mail::to($request->customer_email)->send($mail);
-        // }
-
         $mail = new TicketSale($sale);
 
         $pdf_size = array(0, 0, 349, 573);
 
-        $qrcode = QrCode::size(250)->generate($sale->ticket_num);
-        $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sale', 'qrcode'))->setPaper($pdf_size);
+        $ticket_quantity = $request->customer_quantity;
+        $sales = [];
+        for ($i = 1; $i <= $ticket_quantity; $i++) {
+            $ticket_num = $sale->ticket_num . '-' . $i;
+            $qrcode = QrCode::size(250)->generate($ticket_num);
 
-        $mail->attachData($pdf->output(), $sale->ticket_num . '.pdf');
+            $sales[] = [
+                'ticket_num' => $ticket_num,
+                'ticket_name' => $ticket->ticket_name,
+                'ticket_type' => $ticket->ticket_type,
+                'ticket_price' => $ticket->price,
+                'qrcode' => $qrcode,
+                'sales_date' => $sale->created_at,
+            ];
+        }
+        $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sales'))->setPaper($pdf_size);
+        Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
 
-        Mail::to($request->customer_email)->send($mail);
+
+
+        // $mail = new TicketSale($sale);
+
+        // $pdf_size = array(0, 0, 349, 573);
+
+        // $qrcode = QrCode::size(250)->generate($sale->ticket_num);
+        // $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sale', 'qrcode'))->setPaper($pdf_size);
+
+        // $mail->attachData($pdf->output(), $sale->ticket_num . '.pdf');
+
+        // Mail::to($request->customer_email)->send($mail);
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
 
