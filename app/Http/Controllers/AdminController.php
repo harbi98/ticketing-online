@@ -25,6 +25,18 @@ class AdminController extends Controller
         // return view('admin.view-ticket', compact('tickets'));
     }
 
+    public function editTicket(Request $request){
+        $tickets = Ticket::find($request->ticket_id);
+        Ticket::where('id', $request->ticket_id)->update([
+           'ticket_name' => $request->ticket_name,
+           'ticket_type' => $request->ticket_type,
+           'price' => $request->price,
+           'updated_at' => date('Y-m-d H:i:s')
+        ]);
+        return Redirect::to('tickets')->with('succes_message', 'Ticket Updated Successfully');
+        // return json_encode($tickets);
+    }
+
     public function deleteTicket(Request $request){
         $tickets = Ticket::find($request->ticket_id);
         if($tickets->delete()){

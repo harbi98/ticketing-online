@@ -27,7 +27,7 @@
         <!-- style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ URL::asset('assets/index.jpeg') }}'); background-size: cover;" -->
         <div class="#">
             <header class="text-white py-3">
-                <div class="container d-flex justify-content-between align-items-center">
+                <div class="container d-flex justify-content-between align-items-center custom-fonts">
                     <div class="social-icons d-flex gap-3">
                         <a href="#" class="text-white"><i class="bi bi-facebook"></i></a>
                         <a href="#" class="text-white"><i class="bi bi-instagram"></i></a>
@@ -36,11 +36,10 @@
                     <nav>
                         <ul class="nav nav-custom text-center">
                             @guest
-                                <li class="nav-item"><a href="#" class="nav-link text-white">HOME</a></li>
-                                <li class="nav-item"><a href="#artists" class="nav-link text-white">ARTISTS</a></li>
-                                <li class="nav-item"><a href="#about-event" class="nav-link text-white">ABOUT EVENT</a></li>
-                                <li class="nav-item"><a href="{{ route('index.form') }}"
-                                        class="btn btn-outline-light rounded-0 bg-black">Buy Tickets</a></li>
+                                <li class="nav-item me-3"><a href="#" class="nav-link text-white">HOME</a></li>
+                                <li class="nav-item me-3"><a href="#artists" class="nav-link text-white">ARTISTS</a></li>
+                                <li class="nav-item me-3"><a href="#about-event" class="nav-link text-white">ABOUT EVENT</a></li>
+                                <li class="nav-item"><a href="{{ route('index.form') }}" class="btn btn-outline-light rounded-0 bg-black" style="width: 20vh;">Buy Tickes</a></li>
                             @else
                                 <li class="nav-item">
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST">

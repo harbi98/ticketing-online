@@ -28,6 +28,7 @@ function ticket(ticket_id) {
         },
         dataType: "json",
         success: function (response) {
+            $("#ticket_id").val(response.id);
             $("#ticket_name").val(response.ticket_name);
             $("#ticket_type").val(response.ticket_type);
             $("#ticket_price").val(response.price);

@@ -11,9 +11,9 @@
                     <img src="{{asset('assets/sub-text.png')}}" height="35" class="img-fluid"></img>
                 </div>
                 <div class="d-flex justify-content-center gap-3 mt-5 flex-wrap">
-                    <a href="#contact-us" class="btn btn-outline-light bg-black text-white btn-lg w-25 rounded-0"
-                        style="z-index: 1">Learn More</a>
-                    <a href="{{ route('index.form') }}" class="btn btn-light btn-lg rounded-0" style="z-index: 1">Buy
+                    <a href="#contact-us" class="btn btn-outline-light bg-black text-white btn-lg rounded-0"
+                        style="z-index: 1; width: 25vh;">Learn More</a>
+                    <a href="{{ route('index.form') }}" class="btn btn-light btn-lg rounded-0" style="z-index: 1; width: 25vh;">Buy
                         Tickets & VIP</a>
                 </div>
             </div>
