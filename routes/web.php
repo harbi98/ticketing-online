@@ -40,6 +40,7 @@ Route::group(['middleware' => ['auth', 'authCheck']], function () {
         Route::get('/view-ticket', [AdminController::class, 'viewTicket'])->name('admin.view.ticket');
         Route::post('/edit-ticket', [AdminController::class, 'editTicket'])->name('admin.edit.ticket');
         Route::get('/delete-ticket', [AdminController::class, 'deleteTicket'])->name('admin.delete.ticket');
+        Route::post('/confirm-ticket', [PublicController::class, 'adminConfirmTicket'])->name('admin.confirm.ticket');
     });
 });
 

@@ -90,7 +90,6 @@ class PublicController extends Controller
         // Mail::to($request->customer_email)->send($mail);
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
-
         }
         // return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
         return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
@@ -172,6 +171,31 @@ class PublicController extends Controller
         }
     }
     
+    public function adminConfirmTicket(Request $request)
+    {
+        $latest_id = Sales::max('id');
+        if (is_null($latest_id)) {
+            $nextId = 1;
+        } else {
+            $nextId = $latest_id + 1;
+        }
+        $currentDate = date('y-m-d');
+        $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate;
+        $tickets = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
+
+        $sales = Sales::make([
+            'ticket_num' => $ticket_number,
+            'ticket_id' => $request->ticketSelect,
+            'customer_name' => $request->customer_name,
+            'customer_quantity' => $request->customer_quantity,
+            'customer_email' => $request->customer_email,
+            'customer_contact' => $request->customer_contact,
+            'status' => 0
+        ]);
+        
+        return view('public.confirm-ticket', compact('sales', 'tickets'));
+    }
+
     public function purchaseConfirm(Request $request){
         $sale = Crypt::decryptString($request->query('sale'));
         $ticket = Crypt::decryptString($request->query('ticket'));
