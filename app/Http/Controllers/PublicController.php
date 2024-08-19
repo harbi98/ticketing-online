@@ -78,8 +78,6 @@ class PublicController extends Controller
         $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sales'))->setPaper($pdf_size);
         Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
 
-
-
         // $mail = new TicketSale($sale);
 
         // $pdf_size = array(0, 0, 349, 573);

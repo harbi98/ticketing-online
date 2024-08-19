@@ -18,4 +18,20 @@ class AdminController extends Controller
         ]);
         return Redirect::to('tickets')->with('succes_message', 'New Ticket Added Successfully');
     }
+
+    public function viewTicket(Request $request){
+        $tickets = Ticket::find($request->ticket_id);
+        return json_encode($tickets);
+        // return view('admin.view-ticket', compact('tickets'));
+    }
+
+    public function deleteTicket(Request $request){
+        $tickets = Ticket::find($request->ticket_id);
+        if($tickets->delete()){
+            echo "success";
+        }else{
+            echo "failed";
+        }
+    
+    }
 }

@@ -34,11 +34,11 @@ Route::get('tickets', [TicketController::class, 'tickets'])->name('tickets');
 
 
 //Admin Controller
-
 Route::group(['middleware' => ['auth', 'authCheck']], function () {
     Route::prefix('admin')->group(function () {
-
         Route::post('/add-ticket', [AdminController::class, 'createTicket'])->name('admin.create.ticket');
+        Route::get('/view-ticket', [AdminController::class, 'viewTicket'])->name('admin.view.ticket');
+        Route::get('/delete-ticket', [AdminController::class, 'deleteTicket'])->name('admin.delete.ticket');
     });
 });
 

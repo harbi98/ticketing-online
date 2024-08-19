@@ -22,7 +22,7 @@ class TicketController extends Controller
     public function tickets()
     {
         if (Auth::check()) {
-            $list = Ticket::all();
+            $list = Ticket::orderBy('id', 'desc')->get();
             return view('auth.tickets', compact('list'));
         }
         return redirect("login-page")->withSuccess('You are not allowed to access');

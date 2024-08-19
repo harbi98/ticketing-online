@@ -1,6 +1,6 @@
 @extends('layouts')
 @section('content')
-<main class="auth-form">
+<main class="login-form">
     <div class="card w-25">
         <h3 class="card-header text-center">Login</h3>
         <div class="card-body">
