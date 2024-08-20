@@ -107,6 +107,7 @@
     </table>
     <form method="POST" class="d-flex justify-content-center" action="{{ route('purchased.ticket') }}">
       @csrf
+      <input type="text" name="reference_num" value={{$sales['reference_num']}} hidden>
       <input type="number" name="ticket_id" value={{$tickets['id']}} hidden>
       <input type="text" name="customer_name" value={{$sales['customer_name']}} hidden>
       <input type="number" name="customer_quantity" value={{$sales['customer_quantity']}} hidden>

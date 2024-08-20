@@ -34,7 +34,6 @@ class PublicController extends Controller
 
     public function purchaseTicket(Request $request)
     {
-
         $latest_id = Sales::max('id');
         if (is_null($latest_id)) {
             $nextId = 1;
@@ -42,32 +41,26 @@ class PublicController extends Controller
             $nextId = $latest_id + 1;
         }
         $currentDate = date('y-m-d');
-        $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate;
-
-        $ticket = Ticket::find($request->ticket_id);
-        $sale =  Sales::create([
-            'ticket_num' => $ticket_number,
-            'ticket_id' => $request->ticket_id,
-            'customer_name' => $request->customer_name,
-            'customer_quantity' => $request->customer_quantity,
-            'customer_email' => $request->customer_email,
-            'customer_contact' => $request->customer_contact,
-            'status' => 0
-        ]);
-
-        // ...
-        $mail = new TicketSale($sale);
-
-        $pdf_size = array(0, 0, 349, 573);
-
-        $ticket_quantity = $request->customer_quantity;
         $sales = [];
-        for ($i = 1; $i <= $ticket_quantity; $i++) {
-            $ticket_num = $sale->ticket_num . '-' . $i;
-            $qrcode = QrCode::size(250)->generate($ticket_num);
+        $ticket = Ticket::find($request->ticket_id);
+        // $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
 
+        for($i = 1; $i <= $request->customer_quantity; $i++) {
+            $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
+            $sale =  Sales::create([
+                'ticket_num' => $ticket_number,
+                'ticket_id' => $request->ticket_id,
+                'reference_num' => $request->reference_num,
+                'customer_name' => $request->customer_name,
+                'customer_quantity' => 1,
+                'customer_email' => $request->customer_email,
+                'customer_contact' => $request->customer_contact,
+                'status' => 0
+            ]);
+
+            $qrcode = QrCode::size(250)->generate($ticket_number);
             $sales[] = [
-                'ticket_num' => $ticket_num,
+                'ticket_num' => $ticket_number,
                 'ticket_name' => $ticket->ticket_name,
                 'ticket_type' => $ticket->ticket_type,
                 'ticket_price' => $ticket->price,
@@ -75,19 +68,19 @@ class PublicController extends Controller
                 'sales_date' => $sale->created_at,
             ];
         }
+
+        $pdf_size = array(0, 0, 349, 573);
+        $mail = new TicketSale($sale);
         $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sales'))->setPaper($pdf_size);
         Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
 
         // $mail = new TicketSale($sale);
-
         // $pdf_size = array(0, 0, 349, 573);
-
         // $qrcode = QrCode::size(250)->generate($sale->ticket_num);
         // $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sale', 'qrcode'))->setPaper($pdf_size);
-
         // $mail->attachData($pdf->output(), $sale->ticket_num . '.pdf');
-
         // Mail::to($request->customer_email)->send($mail);
+
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
         }
@@ -105,18 +98,21 @@ class PublicController extends Controller
             $nextId = $latest_id + 1;
         }
         $currentDate = date('y-m-d');
-        $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate;
         $ticket = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
-
-        $sale = Sales::make([
-            'ticket_num' => $ticket_number,
-            'ticket_id' => $request->ticketSelect,
-            'customer_name' => $request->customer_name,
-            'customer_quantity' => $request->customer_quantity,
-            'customer_email' => $request->customer_email,
-            'customer_contact' => $request->customer_contact,
-            'status' => 0
-        ]);
+        $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
+        for($i = 1; $i <= $request->customer_quantity; $i++) {
+            $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
+            $sale = Sales::make([
+                'ticket_num' => $ticket_number,
+                'ticket_id' => $request->ticketSelect,
+                'reference_num' => $reference_num,
+                'customer_name' => $request->customer_name,
+                'customer_quantity' => $request->customer_quantity,
+                'customer_email' => $request->customer_email,
+                'customer_contact' => $request->customer_contact,
+                'status' => 0
+            ]);
+        }
 
         $price_ticket = round($ticket->price);
         // $total_price = intval($tprice) * intval($sale->customer_quantity);
@@ -139,6 +135,7 @@ class PublicController extends Controller
                     "show_line_items" => true,
                     "description" => 'Ticket Items',
                     "payment_method_types" => ["gcash","grab_pay","paymaya","card","brankas_landbank","brankas_bdo","brankas_metrobank"],
+                    "reference_number" => $reference_num,
                     "line_items" => [
                         [
                             "currency" => "PHP",
@@ -180,18 +177,23 @@ class PublicController extends Controller
             $nextId = $latest_id + 1;
         }
         $currentDate = date('y-m-d');
-        $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate;
+    
         $tickets = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
 
-        $sales = Sales::make([
-            'ticket_num' => $ticket_number,
-            'ticket_id' => $request->ticketSelect,
-            'customer_name' => $request->customer_name,
-            'customer_quantity' => $request->customer_quantity,
-            'customer_email' => $request->customer_email,
-            'customer_contact' => $request->customer_contact,
-            'status' => 0
-        ]);
+        for($i = 1; $i <= $request->customer_quantity; $i++) {
+            $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
+            $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
+            $sales = Sales::make([
+                'ticket_num' => $ticket_number,
+                'ticket_id' => $request->ticketSelect,
+                'reference_num' => $reference_num,
+                'customer_name' => $request->customer_name,
+                'customer_quantity' => 1,
+                'customer_email' => $request->customer_email,
+                'customer_contact' => $request->customer_contact,
+                'status' => 0
+            ]);
+        }
         
         return view('public.confirm-ticket', compact('sales', 'tickets'));
     }

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('ticket_num');
             $table->unsignedBigInteger('ticket_id');
+            $table->string('reference_num');
             $table->string('customer_name');
             $table->integer('customer_quantity');
             $table->string('customer_email');

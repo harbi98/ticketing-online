@@ -12,6 +12,7 @@ class Sales extends Model
     protected $fillable = [
         'ticket_num',
         'ticket_id',
+        'reference_num',
         'customer_name',
         'customer_quantity',
         'customer_email',

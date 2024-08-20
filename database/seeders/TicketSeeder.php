@@ -17,14 +17,19 @@ class TicketSeeder extends Seeder
     {
         $tickets = [
             [
-                'ticket_name' => 'Standard',
-                'ticket_type' => 'Standard',
-                'price' => 150.00
+                'ticket_name' => 'Gen Ad',
+                'ticket_type' => 'Gen Ad',
+                'price' => 1300.00
             ],
             [
-                'ticket_name' => 'Gen AD',
-                'ticket_type' => 'Gen AD',
-                'price' => 160.00
+                'ticket_name' => 'VIP',
+                'ticket_type' => 'VIP',
+                'price' => 2100.00
+            ],
+            [
+                'ticket_name' => 'VVIP',
+                'ticket_type' => 'VVIP',
+                'price' => 2600.00
             ]
         ];
 
