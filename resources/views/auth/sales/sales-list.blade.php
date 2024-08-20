@@ -62,7 +62,6 @@
       <td>{{$data->customer_contact}}</td>
     </tr>
     @endforeach -->
-      <!-- <td>{{ $data->customer_address }}</td> -->
 
   </tbody>
 </table>
