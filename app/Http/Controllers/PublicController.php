@@ -197,7 +197,7 @@ class PublicController extends Controller
             ]);
         }
         
-        return view('public.confirm-ticket', compact('sales', 'ticket'));
+        return view('public.confirm-ticket', compact('sales', 'tickets'));
     }
 
     public function purchaseConfirm(Request $request){
