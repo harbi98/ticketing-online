@@ -9,6 +9,7 @@
       <th scope="col">Customer Name</th>
       <th class="text-success" scope="col">Customer Email</th>
       <th scope="col">Customer Contact</th>
+      <th class="text-success" scope="col">Status</th>
       <th scope="col">Action</th>
       <!-- <th scope="col">Customer Address</th> -->
     </tr>
