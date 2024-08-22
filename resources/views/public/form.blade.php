@@ -106,7 +106,7 @@
     <script>
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
-            'eventName': 'October_Metal_Mayhem_Ticket',
+            'event': 'October_Metal_Mayhem_Ticket',
             'ticket_Name': $('#ticketSelect').val(),
             'items': [{
                 'ticket_id': $('#ticketSelect').val(),
