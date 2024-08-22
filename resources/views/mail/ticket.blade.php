@@ -14,15 +14,11 @@
       margin: 0;
     }
 
-
-
     .wrapper {
       font-family: Helvetica, sans-serif;
       background-color: #48a7c5;
       padding: 2em;
       height: 700px;
-
-
     }
 
     .body {
@@ -67,16 +63,9 @@
       height: 50px;
       display: block;
       margin: 0 -1.5em;
-
-
-
     }
 
-
-
     .separator>span {
-
-
       padding: 2px;
       margin: auto 4px;
       height: 5px;
@@ -114,10 +103,6 @@
       background-color: gray;
 
     }
-
-
-
-
 
     .details {
       padding: 0 1em;

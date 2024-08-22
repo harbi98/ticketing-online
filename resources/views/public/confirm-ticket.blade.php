@@ -118,7 +118,7 @@
       </tr>
       <tr>
         <td>Price:</td>
-        <td>₱ {{ $tickets['price'] }}</td>
+        <td id="tix_price">₱ {{ $tickets['price'] }}</td>
       </tr>
       <tr>
         <td>Customer Name:</td>
@@ -140,11 +140,11 @@
     <form method="POST" class="d-flex justify-content-center" action="{{ route('purchased.ticket') }}">
       @csrf
       <input type="text" name="reference_num" value={{$sales['reference_num']}} hidden>
-      <input type="number" name="ticket_id" value={{$tickets['id']}} hidden>
-      <input type="text" name="customer_name" value={{$sales['customer_name']}} hidden>
-      <input type="number" name="customer_quantity" value={{$sales['customer_quantity']}} hidden>
-      <input type="text" name="customer_email" value={{$sales['customer_email']}} hidden>
-      <input type="text" name="customer_contact" value={{$sales['customer_contact']}} hidden>
+      <input type="number" name="ticket_id" id="tix_id" value={{$tickets['id']}} hidden>
+      <input type="text" name="customer_name" id="cus_name" value={{$sales['customer_name']}} hidden>
+      <input type="number" name="customer_quantity" id="tix_quantity" value={{$sales['customer_quantity']}} hidden>
+      <input type="text" name="customer_email" id="cus_email" value={{$sales['customer_email']}} hidden>
+      <input type="text" name="customer_contact" id="cus_contact" value={{$sales['customer_contact']}} hidden>
       <button class="btn btn-primary">Continue</button>
     </form>
   </div>
@@ -155,14 +155,14 @@
         window.dataLayer = window.dataLayer || [];
         window.dataLayer.push({
             'event': 'form_submit_ticket',
-            'total_purchase': $('#ticketSelect').val(),
+            'total_purchase': $('#tix_id').val(),
             'items': [{
-                'ticket_id': $('#ticketSelect').val(),
-                'ticket_quantity': $('#quantity').val(),
-                'ticket_total_price': int($('#quantity').val) * int($('#price').val()),
-                'customer_name': $('#customer_name').val(),
-                'customer_email': $('#customer_email').val(),
-                'customer_number': $('#customer_contact').val(),
+                'ticket_id': $('#tix_id').val(),
+                'ticket_quantity': $('#tix_quantity').val(),
+                'ticket_total_price': int($('#tix_quantity').val) * int($('#tix_price').html()),
+                'customer_name': $('#cus_name').val(),
+                'customer_email': $('#cus_email').val(),
+                'customer_number': $('#cus_contact').val(),
             }]
         });
     </script>
