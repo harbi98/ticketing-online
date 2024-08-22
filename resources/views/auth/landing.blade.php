@@ -68,7 +68,7 @@
         </div>
     </section>
 
-    <section id="contact-us" class="container-fluid contact-section" style="background-image: url('{{asset('assets/bottom-mask.png')}}'); background-size: cover;">
+    <section id="contact-us" class="container-fluid contact-section" style="background-image: url('{{asset('assets/bottom-mask.png')}}'); background-size: cover; margin-top: -25vh;">
         <div class="container" style="margin-top: 15vh;">
             <div class="row text-center justify-content-center">
                 <div class="col-12 display-1">
@@ -98,7 +98,7 @@
         </div>
     </section>
 
-    <section class="bg-black w-100 border-top border-5" style="z-index: 1">
+    <section class="bg-black w-100 border-top border-5" style="z-index: 1;">
         <div class="container-fluid bg-transparent w-75">
             <div class="row py-3">
                 <div class="col-md-6 d-flex justify-content-start align-items-center">

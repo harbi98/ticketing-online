@@ -155,13 +155,12 @@
     }
   </style>
 </head>
-
 <body>
   @foreach ($sales as $sale)
     <div class="wrapper">
       <div class="body">
         <div class="head">
-          <h1 class="header">{{ $sale['ticket_name'] }}</h1>
+          <h1 class="header">October Metal Mayhem: GREYHOUNDZ x TUBERO</h1>
           <div class="loc-and-age-details">
             <p class="loc">Ticket Type: {{ $sale['ticket_type'] }}</p>
             <p class="age">{{ date('F d, Y', strtotime($sale['sales_date'])) }}</p>
