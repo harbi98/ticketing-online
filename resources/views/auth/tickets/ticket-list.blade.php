@@ -16,8 +16,8 @@
       <td>₱ {{$data->price}}</td>
       <td>
       <!-- <a href="#" class="btn btn-warning text-white rounded-5 btn-sm view_ticket" data-bs-toggle="modal" data-bs-target="#viewTicket" data-ticket-id="{{$data->id}}">View</a> -->
-      <a href="#" class="btn btn-info text-white rounded-5 btn-sm edit_ticket" data-bs-toggle="modal" data-bs-target="#viewTicket" data-ticket-id="{{$data->id}}">Edit</a>
-      <a href="#" class="btn btn-danger text-white rounded-5 btn-sm delete_ticket" data-ticket-id="{{$data->id}}">Delete</a>
+      <a href="#" class="btn btn-info text-white btn-sm edit_ticket" data-bs-toggle="modal" data-bs-target="#viewTicket" data-ticket-id="{{$data->id}}">Edit</a>
+      <a href="#" class="btn btn-danger text-white btn-sm delete_ticket" data-ticket-id="{{$data->id}}">Delete</a>
       </td>
     </tr>
   @endforeach

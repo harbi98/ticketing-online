@@ -1,3 +1,4 @@
+@include('auth.sales.edit-sale')
 <table class="table table-fluid table-hover table-striped">
   <thead>
     <tr>
@@ -35,13 +36,14 @@
           <td>{{$data->ticket_id}}</td>
           <td>{{$data->price}}</td>
           <td>{{$data->reference_num}}</td>
-          <td>{{ $ticketCounts[$data['reference_num']] }}</td>
+          <td>{{$ticketCounts[$data['reference_num']] }}</td>
           <td>{{$data->customer_name}}</td>
           <td>{{$data->customer_email}}</td>
           <td>{{$data->customer_contact}}</td>
+          <td><span class="badge bg-{{$data->customer_email ? 'warning' : 'success'}}">{{$data->customer_email ? 'Not Yet Scanned' : 'Scanned'}}</span></td>
           <td>
-            <a href="#" class="btn btn-warning btn-sm d-flex justify-content-center align-items-center">
-                <i class='bx bx-edit-alt'></i>&nbsp;View
+            <a href="#" class="btn btn-warning btn-sm d-flex justify-content-center align-items-center edit_sales" data-sale-id="{{$data->reference_num}}" data-bs-toggle="modal" data-bs-target="#editSale">
+                <i class='bx bx-edit-alt'></i>&nbsp;Edit
             </a>
           </td>
         </tr>
@@ -67,3 +69,8 @@
   </tbody>
 </table>
 {{$list->links()}}
+@if (session('status'))
+<script>
+  swal("{{ strpos(session('status'), 'Unable to send email') !== false ? 'Error!' : 'Success!' }}", "{{ strpos(session('status'), 'Unable to send email') !== false ? 'error' : 'success' }}", "{{ strpos(session('status'), 'Unable to send email') !== false ? 'error' : 'success' }}");
+</script>
+@endif

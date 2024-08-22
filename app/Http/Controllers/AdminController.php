@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sales;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -45,5 +46,14 @@ class AdminController extends Controller
             echo "failed";
         }
     
+    }
+
+    public function editSale(Request $request){
+        // $sales = Sales::where('reference_num', $request->sale_id)->join('ticket', 'sales.ticket_id', '=', 'ticket.id')->get();
+        $sales = Sales::where('reference_num', $request->sale_id)
+        ->with('ticket') 
+        ->get();
+        return json_encode($sales);
+        // return json_encode($sale);
     }
 }

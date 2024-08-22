@@ -15,6 +15,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Response;
+use Throwable;
 
 class PublicController extends Controller
 {
@@ -181,11 +182,10 @@ class PublicController extends Controller
         $currentDate = date('y-m-d');
     
         $tickets = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
-
+        $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
         for($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
-            $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
-            $sales = Sales::make([
+            $sale = Sales::create([
                 'ticket_num' => $ticket_number,
                 'ticket_id' => $request->ticketSelect,
                 'reference_num' => $reference_num,
@@ -195,9 +195,31 @@ class PublicController extends Controller
                 'customer_contact' => $request->customer_contact,
                 'status' => 0
             ]);
+
+            $qrcode = QrCode::size(250)->generate($ticket_number);
+            $sales[] = [
+                'ticket_num' => $ticket_number,
+                'ticket_name' => $tickets->ticket_name,
+                'ticket_type' => $tickets->ticket_type,
+                'ticket_price' => $tickets->price,
+                'qrcode' => $qrcode,
+                'sales_date' => $sale->created_at,
+                'ticket_quantity' => 1
+            ];
+        }
+
+        $pdf_size = array(0, 0, 349, 573);
+        $mail = new TicketSale($sale);
+        $pdf = PDF::loadView('mail.ticket', compact('tickets', 'sales'))->setPaper($pdf_size);
+        try{
+            Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
+            return back()->with('status', 'Ticket Purchase Successful');
+        }catch(Throwable $e){
+            return back()->with('status', 'Unable to send email. Please try again.');
         }
         
-        return view('public.confirm-ticket', compact('sales', 'tickets'));
+        // echo Sales::all();
+        // return view('public.confirm-ticket', compact('sales', 'tickets'));
     }
 
     public function purchaseConfirm(Request $request){

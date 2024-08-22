@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Ticket;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -19,4 +20,9 @@ class Sales extends Model
         'customer_contact',
         'status'
     ];
+    
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'ticket_id'); // Adjust 'ticket_id' to your foreign key
+    }
 }

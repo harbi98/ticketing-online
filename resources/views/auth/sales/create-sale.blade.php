@@ -2,7 +2,6 @@
   Create Sale
 </button>
 
-
 <div class="modal fade" id="createTicket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
