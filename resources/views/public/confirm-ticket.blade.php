@@ -7,34 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Purchase Ticket</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDTX74RGJJ"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
 
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-
-        gtag('config', 'G-RDTX74RGJJ');
-    </script>
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w, d, s, l, i) {
-            w[l] = w[l] || [];
-            w[l].push({
-                'gtm.start': new Date().getTime(),
-                event: 'gtm.js'
-            });
-            var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s),
-                dl = l != 'dataLayer' ? '&l=' + l : '';
-            j.async = true;
-            j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-            f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-5DL27PN9');
-    </script>
   <style>
     body {
       display: flex;
@@ -118,7 +91,7 @@
       </tr>
       <tr>
         <td>Price:</td>
-        <td id="tix_price">₱ {{ $tickets['price'] }}</td>
+        <td>₱ {{ $tickets['price'] }}</td>
       </tr>
       <tr>
         <td>Customer Name:</td>
@@ -143,29 +116,16 @@
       <input type="number" name="ticket_id" id="tix_id" value={{$tickets['id']}} hidden>
       <input type="text" name="customer_name" id="cus_name" value={{$sales['customer_name']}} hidden>
       <input type="number" name="customer_quantity" id="tix_quantity" value={{$sales['customer_quantity']}} hidden>
+      <input type="text" name="ticket_price" id="tix_price" value={{$tickets['price']}} hidden>
       <input type="text" name="customer_email" id="cus_email" value={{$sales['customer_email']}} hidden>
       <input type="text" name="customer_contact" id="cus_contact" value={{$sales['customer_contact']}} hidden>
       <button class="btn btn-primary">Continue</button>
     </form>
   </div>
+  
   <div class="footer-text">
     Powered by MediaOne Software Solutions
   </div>
-  <script>
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-            'event': 'form_submit_ticket',
-            'total_purchase': $('#tix_id').val(),
-            'items': [{
-                'ticket_id': $('#tix_id').val(),
-                'ticket_quantity': $('#tix_quantity').val(),
-                'ticket_total_price': int($('#tix_quantity').val) * int($('#tix_price').html()),
-                'customer_name': $('#cus_name').val(),
-                'customer_email': $('#cus_email').val(),
-                'customer_number': $('#cus_contact').val(),
-            }]
-        });
-    </script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>

@@ -66,6 +66,7 @@ class PublicController extends Controller
                 'ticket_price' => $ticket->price,
                 'qrcode' => $qrcode,
                 'sales_date' => $sale->created_at,
+                'ticket_quantity' => 1
             ];
         }
 
@@ -84,8 +85,9 @@ class PublicController extends Controller
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
         }
-        // return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
         return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
+        // return view('public.thank-you-page', compact('sales', 'ticket'));
+        
     }
 
 
@@ -195,7 +197,7 @@ class PublicController extends Controller
             ]);
         }
         
-        return view('public.confirm-ticket', compact('sales', 'tickets'));
+        return view('public.confirm-ticket', compact('sales', 'ticket'));
     }
 
     public function purchaseConfirm(Request $request){

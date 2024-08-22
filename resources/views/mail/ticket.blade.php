@@ -16,13 +16,12 @@
 
     .wrapper {
       font-family: Helvetica, sans-serif;
-      background-color: #48a7c5;
+      /* background-color: #48a7c5; */
       padding: 2em;
       height: 700px;
     }
 
     .body {
-
       background-color: white;
       margin: auto auto;
       box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -71,7 +70,7 @@
       height: 5px;
       width: 5px;
       border-radius: 50%;
-      background-color: #48a7c5;
+      /* background-color: #48a7c5; */
       margin-bottom: 13px;
       display: inline-block;
     }
@@ -142,7 +141,15 @@
 </head>
 <body>
   @foreach ($sales as $sale)
-    <div class="wrapper">
+  @php
+    $bgColor = ($sale['ticket_type'] == 'Gen Ad') ? '#48a7c5' : '#FABC3F';
+  @endphp
+  <style>
+    .separator>span {
+      background-color: <?= htmlspecialchars($bgColor, ENT_QUOTES, 'UTF-8') ?>;
+    }
+  </style>
+    <div class="wrapper" style="background-color: <?=$bgColor?>">
       <div class="body">
         <div class="head">
           <h1 class="header">October Metal Mayhem: GREYHOUNDZ x TUBERO</h1>
