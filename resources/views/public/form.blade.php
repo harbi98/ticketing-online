@@ -96,13 +96,28 @@
             </div>
             <div class="text-center">
                 <button type="submit" class="btn btn-primary">Continue</button>
-            </div>
+            </div>  
         </form>
     </div>
 
     <div class="footer-text">
         Powered by MediaOne Software Solutions
     </div>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            'eventName': 'October_Metal_Mayhem_Ticket',
+            'ticket_Name': $('#ticketSelect').val(),
+            'items': [{
+                'ticket_id': $('#ticketSelect').val(),
+                'ticket_quantity': $('#quantity').val(),
+                'ticket_total_price': int($('#quantity').val) * int($('#price').val()),
+                'customer_name': $('#customer_name').val(),
+                'customer_email': $('#customer_email').val(),
+                'customer_number': $('#customer_contact').val(),
+            }]
+        });
+    </script>
     <script>
         document.getElementById('ticketSelect').addEventListener('change', function() {
             var selectedOption = this.options[this.selectedIndex];
