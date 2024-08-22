@@ -142,6 +142,12 @@ body,html {
       float: none;
     }
   }
+
+  .event-section {
+    margin-top: -23vh;
+    background-size: 150vh;
+    padding-bottom: 100vh;
+  }
 /* 
 .main {
     display: flex;

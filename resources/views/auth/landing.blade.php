@@ -26,9 +26,8 @@
         </div>
     </section>
 
-    <section id="about-event" class="container-fluid event-section"
-        style="background-image: url('{{asset('assets/vector-filter.png')}}'); background-size: cover;">
-        <div class="container" style="margin-top: 10vh;">
+    <section id="about-event" class="container-fluid event-section" style="background-image: url('{{asset('assets/vector-filter.png')}}');">
+        <div class="container" style="margin-top: 15vh;">
             <div class="row text-center justify-content-center">
                 <div class="col-12 display-1">
                     <img src="{{ asset('assets/second-main-text.png') }}" class="img-fluid"></img>
