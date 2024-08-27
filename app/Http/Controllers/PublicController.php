@@ -105,8 +105,9 @@ class PublicController extends Controller
             $nextId = $latest_id + 1;
         }
         $currentDate = date('y-m-d');
-        $ticket = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
+        $ticket = Ticket::select(['id', 'ticket_name', 'price', 'ticket_type'])->where('id', '=', $request->ticketSelect)->first();
         $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
+        $sales = [];
         for($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
             $sale = Sales::make([
@@ -119,14 +120,32 @@ class PublicController extends Controller
                 'customer_contact' => $request->customer_contact,
                 'status' => 0
             ]);
+
+            $sales[] = [
+                'reference_num' => $reference_num,
+                'sale_quantity' => 1,
+                'ticket_num' => $ticket_number,
+                'ticket_name' => $ticket->ticket_name,
+                'ticket_type' => $ticket->ticket_type,
+                'ticket_price' => $ticket->price,
+                'ticket_id' => $request->ticketSelect,
+                'customer_name' => $request->customer_name,
+                'customer_quantity' => $request->customer_quantity,
+                'customer_email' => $request->customer_email,
+                'customer_contact' => $request->customer_contact,
+                'status' => 0
+            ];
         }
+
+        $salesJson = json_encode($sales);
 
         $price_ticket = round($ticket->price);
         // $total_price = intval($tprice) * intval($sale->customer_quantity);
         $final_price = strval($price_ticket) . '00';
 
-        $encryptedSale = Crypt::encryptString($sale);
+        $encryptedSale = Crypt::encryptString($salesJson);
         $encryptedTicket = Crypt::encryptString($ticket);
+        
 
         $client = new Client();
         $body = [
@@ -232,8 +251,11 @@ class PublicController extends Controller
         $sales = json_decode($sale, true);
         $tickets = json_decode($ticket, true);
 
-        // print_r($sales);
+        $saledb = json_encode($sales);
+        $ticketdb = json_encode($tickets);
+
         return view('public.confirm-ticket', compact('sales', 'tickets'));
+        // return view('public.confirm-ticket', ['sales'=> $sales, 'tickets' => $tickets]);
     }
     public function scanTicket($ticket_number){
         if ($ticket_number) {
