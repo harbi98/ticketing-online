@@ -13,18 +13,30 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDTX74RGJJ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
 
         gtag('config', 'G-RDTX74RGJJ');
     </script>
     <!-- Google Tag Manager -->
     <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-5DL27PN9');
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-5DL27PN9');
     </script>
     <!-- End Google Tag Manager -->
 
@@ -42,39 +54,12 @@
         }
     </style>
 
-    <script>
-        // $.ajax({
-        //    url: "",
-        //    type: "POST",
-        //    data: {},
-        //    success: function(data) {
-        //         console.log(data);
-        //    }
-        // });
-        function redirectAfterDelay() {
-            // window.dataLayer = window.dataLayer || [];
-            // window.dataLayer.push({
-            //     'event': 'form_submit_ticket',
-            //     'ticket_ref_num': ,
-            //     'total_purchase': ,
-            //     'total_quantity': ,
-            //     'items': {
-            //         'ticket_id': ,
-            //         'ticket_name': ,
-            //         'ticket_type': ,
-            //     }
-            // });
-            setTimeout(function() {
-                window.location.href = 'buy-a-ticket'; 
-            }, 10000); 
-        }
-    </script>
 </head>
 
 <body onload="redirectAfterDelay()">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DL27PN9"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+            height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
     <div class="thank-you-message">
         <h1>Thank You for Buying a Ticket!</h1>
@@ -84,6 +69,42 @@
         </div>
     </div>
 
+    <script>
+        function redirectAfterDelay() {
+
+            var response = <?= $saledb ?>;
+            // console.log(response[0].reference_num);
+            var total_price = 0;
+            const data = [];
+
+            $.each(response, function(key, value) {
+                // console.log(value);
+                total_price += parseInt(value.ticket_price);
+                data.push({
+                    'ticket_num': value.ticket_num,
+                    'ticket_name': value.ticket_name,
+                    'ticket_type': value.ticket_type,
+                    'ticket_price': value.ticket_price
+                });
+            });
+
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'form_submit_ticket',
+                'ticket_ref_num': response[0].reference_num,
+                'total_purchase': total_price,
+                'total_quantity': response.length,
+                'sales_date': response[0].sales_date,
+                'items': data,
+            });
+
+            // console.log(window.dataLayer);
+
+            setTimeout(function() {
+                window.location.href = 'buy-a-ticket';
+            }, 10000);
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>

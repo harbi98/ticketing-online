@@ -65,6 +65,7 @@ class PublicController extends Controller
                 'ticket_name' => $ticket->ticket_name,
                 'ticket_type' => $ticket->ticket_type,
                 'ticket_price' => $ticket->price,
+                'reference_num' => $request->reference_num,
                 'qrcode' => $qrcode,
                 'sales_date' => $sale->created_at,
                 'ticket_quantity' => 1
@@ -86,7 +87,10 @@ class PublicController extends Controller
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
         }
-        return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
+        // return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
+        // return redirect()->route("index.thank.you.page")->with(['sales' => $sales]);
+        $saledb = json_encode($sales);
+        return view('public.thank-you-page', compact('ticket', 'saledb'));
         // return view('public.thank-you-page', compact('sales', 'ticket'));
         
     }
@@ -247,5 +251,4 @@ class PublicController extends Controller
             return response(['message' => 'No Ticket Number Found'], 404);
         }
     }
-    
 }
