@@ -184,6 +184,9 @@
               // 'sales_date': response[0].sales_date,
               'items': data,
           });
+          
+          window.eventObject = window.dataLayer[5];
+          window.dataLayer.push(window.eventObject);
       }
   </script>
 

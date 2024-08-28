@@ -9,7 +9,7 @@
         <h1 class="modal-title fs-5" id="exampleModalLabel">Create Ticket</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <form method="POST" action="{{ route('admin.confirm.ticket') }}">
+      <form id="ticketForm" method="POST" action="{{ route('admin.confirm.ticket') }}">
         <div class="modal-body">
           @csrf
           <!-- <div class="mb-3">

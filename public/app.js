@@ -54,19 +54,29 @@ $(".edit_sales").click(function() {
             var quantity = 0;
             var total_price = 0;
             $.each(response, function (index, row) {
+                // console.log(row);
+                var status = row.status == 1 ? 'success' : 'secondary';
+                var text = row.status == 1 ? 'Scanned' : 'Pending';
                 quantity += row.customer_quantity;
                 total_price = row.ticket.price;
                 var tr = '<tr>';
                 tr += '<td>' + row.ticket_num + '</td>';
                 tr += '<td>' + row.reference_num + '</td>';
-                tr += '<td>' + row.ticket_id + '</td>';
+                tr += '<td>' + row.ticket.ticket_name + '</td>';
                 tr += '<td>₱ ' + row.ticket.price + '</td>';
-                tr += '<td><a href="#" class="btn btn-warning text-white btn-sm" data-ticket-id="' + row.id + '">Update</td>';
+                tr += '<td><span class="badge bg-' + status + '">' + text + '</span></td>';
+                tr += '<td><a href="#" class="btn btn-warning text-white btn-sm editspecificsale" data-bs-target="#editSpecificSale" data-bs-toggle="modal" data-sale-id="' + row.id + '" data-ticket-id="' + row.ticket_id + '">Update</td>';
                 tr += '</tr>';
                 $('#ticketList').append(tr);
             });
-            var total = parseInt(total_price) * parseInt(quantity);
+            var total = parseInt(quantity) * parseInt(total_price);
             $('#totalPrice').text('₱ ' + total.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 }));
+
+            $('.editspecificsale').click(function() {
+                var id = $(this).data('sale-id');
+                $('#sale_id').val(id);
+                $('#edit_ticket').val($(this).data('ticket-id'));
+            });
             // console.log();
         },
         error: function(xhr, status, error) {
@@ -74,6 +84,7 @@ $(".edit_sales").click(function() {
         },
     });
 });
+
 
 function ticket2(ticket_id) {
     $.ajax({
@@ -101,3 +112,12 @@ function ticket2(ticket_id) {
         },
     });
 }
+
+$(function() {
+    $('#ticketForm').submit(function(e){
+        e.preventDefault();
+
+        // var form = new FormData(this);
+
+    });
+});

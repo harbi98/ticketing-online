@@ -26,11 +26,11 @@ class TicketSeeder extends Seeder
                 'ticket_type' => 'VIP',
                 'price' => 2100.00
             ],
-            [
-                'ticket_name' => 'VVIP',
-                'ticket_type' => 'VVIP',
-                'price' => 2600.00
-            ]
+            // [
+            //     'ticket_name' => 'VVIP',
+            //     'ticket_type' => 'VVIP',
+            //     'price' => 2600.00
+            // ]
         ];
 
         foreach ($tickets as $value) {
