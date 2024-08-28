@@ -19,7 +19,8 @@ use Throwable;
 
 class PublicController extends Controller
 {
-    public function homepage(){
+    public function homepage()
+    {
         return view('auth.landing');
     }
     public function index()
@@ -46,9 +47,9 @@ class PublicController extends Controller
         $ticket = Ticket::find($request->ticket_id);
         // $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
 
-        for($i = 1; $i <= $request->customer_quantity; $i++) {
+        for ($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
-            $sale =  Sales::create([
+            $sale = Sales::create([
                 'ticket_num' => $ticket_number,
                 'ticket_id' => $request->ticket_id,
                 'reference_num' => $request->reference_num,
@@ -92,7 +93,7 @@ class PublicController extends Controller
         $saledb = json_encode($sales);
         return view('public.thank-you-page', compact('ticket', 'saledb'));
         // return view('public.thank-you-page', compact('sales', 'ticket'));
-        
+
     }
 
 
@@ -108,7 +109,7 @@ class PublicController extends Controller
         $ticket = Ticket::select(['id', 'ticket_name', 'price', 'ticket_type'])->where('id', '=', $request->ticketSelect)->first();
         $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
         $sales = [];
-        for($i = 1; $i <= $request->customer_quantity; $i++) {
+        for ($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
             $sale = Sales::make([
                 'ticket_num' => $ticket_number,
@@ -145,7 +146,7 @@ class PublicController extends Controller
 
         $encryptedSale = Crypt::encryptString($salesJson);
         $encryptedTicket = Crypt::encryptString($ticket);
-        
+
 
         $client = new Client();
         $body = [
@@ -160,7 +161,7 @@ class PublicController extends Controller
                     "show_description" => true,
                     "show_line_items" => true,
                     "description" => 'Ticket Items',
-                    "payment_method_types" => ["gcash","grab_pay","paymaya","card","brankas_landbank","brankas_bdo","brankas_metrobank"],
+                    "payment_method_types" => ["gcash", "grab_pay", "paymaya", "card", "brankas_landbank", "brankas_bdo", "brankas_metrobank"],
                     "reference_number" => $reference_num,
                     "line_items" => [
                         [
@@ -175,25 +176,25 @@ class PublicController extends Controller
                 ]
             ]
         ];
-
+        // sk_live_TH5qUQJN7VMM5Rgpg3zBtY2X sk_test_JktT2eXzzLLo43HuhqErP7Vj
         try {
             $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
                 'body' => json_encode($body),
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
-                    'Authorization' => 'Basic ' . base64_encode('sk_test_JktT2eXzzLLo43HuhqErP7Vj' . ':'),
+                    'Authorization' => 'Basic ' . base64_encode('sk_live_TH5qUQJN7VMM5Rgpg3zBtY2X' . ':'),
                 ],
             ]);
             $responseBody = json_decode($response->getBody(), true);
-            
+
             // print_r($responseBody['data']);
             return redirect($responseBody['data']['attributes']['checkout_url']);
         } catch (\Exception $e) {
             return back()->with('error', 'Unable to create checkout session. Please try again.');
         }
     }
-    
+
     public function adminConfirmTicket(Request $request)
     {
         $latest_id = Sales::max('id');
@@ -203,10 +204,10 @@ class PublicController extends Controller
             $nextId = $latest_id + 1;
         }
         $currentDate = date('y-m-d');
-    
+
         $tickets = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
         $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
-        for($i = 1; $i <= $request->customer_quantity; $i++) {
+        for ($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
             $sale = Sales::create([
                 'ticket_num' => $ticket_number,
@@ -234,18 +235,19 @@ class PublicController extends Controller
         $pdf_size = array(0, 0, 349, 573);
         $mail = new TicketSale($sale);
         $pdf = PDF::loadView('mail.ticket', compact('tickets', 'sales'))->setPaper($pdf_size);
-        try{
+        try {
             Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
             return back()->with('status', 'Ticket Purchase Successful');
-        }catch(Throwable $e){
+        } catch (Throwable $e) {
             return back()->with('status', 'Unable to send email. Please try again.');
         }
-        
+
         // echo Sales::all();
         // return view('public.confirm-ticket', compact('sales', 'tickets'));
     }
 
-    public function purchaseConfirm(Request $request){
+    public function purchaseConfirm(Request $request)
+    {
         $sale = Crypt::decryptString($request->query('sale'));
         $ticket = Crypt::decryptString($request->query('ticket'));
         $sales = json_decode($sale, true);
@@ -257,19 +259,20 @@ class PublicController extends Controller
         return view('public.confirm-ticket', compact('sales', 'tickets'));
         // return view('public.confirm-ticket', ['sales'=> $sales, 'tickets' => $tickets]);
     }
-    public function scanTicket($ticket_number){
+    public function scanTicket($ticket_number)
+    {
         if ($ticket_number) {
-           $scan_ticket = Sales::where('ticket_num', $ticket_number)->first();
+            $scan_ticket = Sales::where('ticket_num', $ticket_number)->first();
 
-           if($scan_ticket->status == 1){
+            if ($scan_ticket->status == 1) {
                 return response(['message' => 'Ticket has already scanned'], 200);
-           }
+            }
 
-           $scan_ticket->status = 1;
-           $scan_ticket->save();
-           return response(['message' => 'Ticket Scanned'], 200);
+            $scan_ticket->status = 1;
+            $scan_ticket->save();
+            return response(['message' => 'Ticket Scanned'], 200);
 
-        }else{
+        } else {
             return response(['message' => 'No Ticket Number Found'], 404);
         }
     }
