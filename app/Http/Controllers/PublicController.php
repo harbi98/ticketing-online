@@ -176,7 +176,7 @@ class PublicController extends Controller
                 ]
             ]
         ];
-        // sk_live_TH5qUQJN7VMM5Rgpg3zBtY2X sk_test_JktT2eXzzLLo43HuhqErP7Vj
+
         try {
             $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
                 'body' => json_encode($body),
