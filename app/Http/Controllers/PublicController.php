@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Redirect;
 use App\Mail\TicketSale;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Crypt;
-
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Barryvdh\DomPDF\Facade\Pdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
@@ -177,13 +177,14 @@ class PublicController extends Controller
             ]
         ];
 
+        $secretKey = env('PAYMONGO_SECRET_KEY');
         try {
             $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
                 'body' => json_encode($body),
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
-                    'Authorization' => 'Basic ' . base64_encode('sk_live_TH5qUQJN7VMM5Rgpg3zBtY2X' . ':'),
+                    'Authorization' => 'Basic ' . base64_encode($secretKey . ':'),
                 ],
             ]);
             $responseBody = json_decode($response->getBody(), true);
