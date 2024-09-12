@@ -177,14 +177,14 @@ class PublicController extends Controller
             ]
         ];
 
-        $secretKey = env('PAYMONGO_SECRET_KEY');
+
         try {
             $response = $client->request('POST', 'https://api.paymongo.com/v1/checkout_sessions', [
                 'body' => json_encode($body),
                 'headers' => [
                     'Content-Type' => 'application/json',
                     'Accept' => 'application/json',
-                    'Authorization' => 'Basic ' . base64_encode($secretKey . ':'),
+                    'Authorization' => 'Basic ' . ,
                 ],
             ]);
             $responseBody = json_decode($response->getBody(), true);
