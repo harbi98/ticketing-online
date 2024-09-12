@@ -24,7 +24,13 @@
     </style>
 
 </head>
-
+<script>
+    function redirectAfterDelay() {
+        setTimeout(function() {
+            window.location.href = "/buy-a-ticket";
+        }, 10000);
+    }
+</script>
 <body onload="redirectAfterDelay()">
     <div class="thank-you-message">
         <h1>Thank You for Buying a Ticket!</h1>

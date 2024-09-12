@@ -141,51 +141,52 @@
 </head>
 <body>
   @foreach ($sales as $sale)
-  @php
+    @php
     $bgColor = ($sale['ticket_type'] == 'Gen Ad') ? '#48a7c5' : '#FABC3F';
-  @endphp
-  <style>
+    @endphp
+    <style>
     .separator>span {
       background-color: <?= htmlspecialchars($bgColor, ENT_QUOTES, 'UTF-8') ?>;
     }
-  </style>
+    </style>
     <div class="wrapper" style="background-color: <?=$bgColor?>">
       <div class="body">
-        <div class="head">
-          <h1 class="header">October Metal Mayhem: GREYHOUNDZ x TUBERO</h1>
-          <div class="loc-and-age-details">
-            <p class="loc">Ticket Type: {{ $sale['ticket_type'] }}</p>
-            <p class="age">{{ date('F d, Y', strtotime($sale['sales_date'])) }}</p>
-          </div>
-        </div>
-        <div class="separator">
-          <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
-        </div>
-        <div class="image">
-          <img src="data:image/png;base64, {!! base64_encode($sale['qrcode']) !!}" alt="QR Code">
-        </div>
-        <div class="details">
-          <div class="detail">
-            <p class="title">Entrance code</p>
-            <p class="value">{{ $sale['ticket_num'] }}</p>
-          </div>
-        </div>
-        <div class="separator">
-          <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
-        </div>
-        <div class="details">
-          <div class="detail">
-            <p class="title">Ticket Type</p>
-            <p class="value">{{ $sale['ticket_type'] }}</p>
-          </div>
-          <div class="detail">
-            <p class="title">Price(PHP)</p>
-            <p class="value">{{ $sale['ticket_price'] }}</p>
-          </div>
-        </div>
+      <div class="head">
+      <h1 class="header">October Metal Mayhem: GREYHOUNDZ x TUBERO</h1>
+      <div class="loc-and-age-details">
+      <p class="loc">Ticket Type: {{ $sale['ticket_type'] }}</p>
+      <p class="age">Concert Date: October 26, 2024 </p>
+      <!-- {{ date('F d, Y', strtotime($sale['sales_date'])) }} -->
+      </div>
+      </div>
+      <div class="separator">
+      <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
+      </div>
+      <div class="image">
+      <img src="data:image/png;base64, {!! base64_encode($sale['qrcode']) !!}" alt="QR Code">
+      </div>
+      <div class="details">
+      <div class="detail">
+      <p class="title">Entrance code</p>
+      <p class="value">{{ $sale['ticket_num'] }}</p>
+      </div>
+      </div>
+      <div class="separator">
+      <span id="left-circle"></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span id="right-circle"></span>
+      </div>
+      <div class="details">
+      <div class="detail">
+      <p class="title">Ticket Type</p>
+      <p class="value">{{ $sale['ticket_type'] }}</p>
+      </div>
+      <div class="detail">
+      <p class="title">Price(PHP)</p>
+      <p class="value">{{ $sale['ticket_price'] }}</p>
+      </div>
+      </div>
 
-        <div class="footer">
-        </div>
+      <div class="footer">
+      </div>
       </div>
     </div>
   @endforeach

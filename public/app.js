@@ -113,11 +113,11 @@ function ticket2(ticket_id) {
     });
 }
 
-$(function() {
-    $('#ticketForm').submit(function(e){
-        e.preventDefault();
+// $(function() {
+//     $('#ticketForm').submit(function(e){
+//         e.preventDefault();
 
-        // var form = new FormData(this);
+//         // var form = new FormData(this);
 
-    });
-});
+//     });
+// });
