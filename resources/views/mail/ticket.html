@@ -44,8 +44,9 @@
     }
 
     .loc-and-age-details {
-      max-width: 100rem;
+
       font-size: 15px;
+      max-width: 100rem;
       margin-bottom: 25px;
     }
 
@@ -142,7 +143,7 @@
 <body>
   @foreach ($sales as $sale)
     @php
-      $bgColor = ($sale['ticket_type'] == 'Gen Ad') ? '#48a7c5' : '#FABC3F';
+    $bgColor = ($sale['ticket_type'] == 'Gen Ad') ? '#48a7c5' : '#FABC3F';
     @endphp
     <style>
     .separator>span {

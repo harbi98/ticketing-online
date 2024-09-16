@@ -10,7 +10,7 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
-{
+{   
     public function index() {
         if (Auth::check()) {
             return redirect()->intended('dashboard');

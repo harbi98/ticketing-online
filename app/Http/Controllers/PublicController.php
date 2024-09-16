@@ -69,6 +69,8 @@ class PublicController extends Controller
                 'reference_num' => $request->reference_num,
                 'qrcode' => $qrcode,
                 'sales_date' => $sale->created_at,
+                'customer_name' => $request->customer_name,
+                'customer_email' => $request->customer_email,
                 'ticket_quantity' => 1
             ];
         }
@@ -229,6 +231,8 @@ class PublicController extends Controller
                 'ticket_price' => $tickets->price,
                 'qrcode' => $qrcode,
                 'sales_date' => $sale->created_at,
+                'customer_name' => $request->customer_name,
+                'customer_email' => $request->customer_email,
                 'ticket_quantity' => 1
             ];
         }
