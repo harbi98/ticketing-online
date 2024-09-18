@@ -78,7 +78,7 @@ class PublicController extends Controller
         $pdf_size = array(0, 0, 349, 573);
         $mail = new TicketSale($sale);
         $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sales'))->setPaper($pdf_size);
-        Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
+        // Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
 
         // $mail = new TicketSale($sale);
         // $pdf_size = array(0, 0, 349, 573);
@@ -241,7 +241,7 @@ class PublicController extends Controller
         $mail = new TicketSale($sale);
         $pdf = PDF::loadView('mail.ticket', compact('tickets', 'sales'))->setPaper($pdf_size);
         try {
-            Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
+            // Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
             return back()->with('status', 'Ticket Purchase Successful');
         } catch (Throwable $e) {
             return back()->with('status', 'Unable to send email. Please try again.');
