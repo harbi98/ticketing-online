@@ -25,7 +25,7 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Google tag (gtag.js) -->
+    {{-- <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDTX74RGJJ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -76,16 +76,16 @@
         <img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1207610950311468&ev=PageView&noscript=1" />
     </noscript>
-    <!-- End Meta Pixel Code -->
+    <!-- End Meta Pixel Code --> --}}
 
 </head>
 
 <body>
 
-    <!-- Google Tag Manager (noscript) -->
+    {{-- <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DL27PN9" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <!-- End Google Tag Manager (noscript) --> --}}
 
     <div class="main {{ Auth::check() ? 'bgin2' : 'bgin' }}">
         <!-- style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ URL::asset('assets/index.jpeg') }}'); background-size: cover;" -->

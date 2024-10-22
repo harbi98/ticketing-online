@@ -1,6 +1,20 @@
-<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTicket">
-  Create Sale
-</button>
+<div class="row">
+  <div class="col-md-6">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTicket">
+      Create Sale
+    </button>
+  </div>
+
+  <div class="col-md-6 d-flex flex-row-reverse">
+    <input type="text" placeholder="Search.." id="search">
+  </div>
+</div>
+
+
+
+
+
+
 
 <div class="modal fade" id="createTicket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
@@ -22,19 +36,19 @@
             </select>
           </div> -->
           <div class="row mb-3">
-              <div class="col-md-6">
-                  <label for="staticEmail" class="form-label">Select Tickets</label>
-                  <select class="form-select" id="ticketSelect" name="ticketSelect" aria-label="Default select example" required>
-                      <option selected>Select a Ticket</option>
-                      @foreach ($tickets as $ticket)
-                      <option value="{{ $ticket->id }}" data-price="{{ $ticket->price }}">{{ $ticket->ticket_name }}</option>
-                      @endforeach
-                  </select>
-              </div>
-              <div class="col-md-6">
-                  <label for="quantity" class="form-label text-left">Quantity</label>
-                  <input type="number" class="form-control" id="quantity" name="customer_quantity" required>
-              </div>
+            <div class="col-md-6">
+              <label for="staticEmail" class="form-label">Select Tickets</label>
+              <select class="form-select" id="ticketSelect" name="ticketSelect" aria-label="Default select example" required>
+                <option selected>Select a Ticket</option>
+                @foreach ($tickets as $ticket)
+                <option value="{{ $ticket->id }}" data-price="{{ $ticket->price }}">{{ $ticket->ticket_name }}</option>
+                @endforeach
+              </select>
+            </div>
+            <div class="col-md-6">
+              <label for="quantity" class="form-label text-left">Quantity</label>
+              <input type="number" class="form-control" id="quantity" name="customer_quantity" required>
+            </div>
           </div>
           <div class="mb-3">
             <label for="price" class="form-label text-left">Price</label>
@@ -65,5 +79,14 @@
     var selectedOption = this.options[this.selectedIndex];
     var price = selectedOption.getAttribute('data-price');
     document.getElementById('price').value = price ? price : '';
+  });
+
+  $(document).ready(function() {
+    $("#search").on("keyup", function() {
+      var value = $(this).val().toLowerCase();
+      $("#myTable tr").filter(function() {
+        $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+      });
+    });
   });
 </script>
