@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,11 +25,11 @@
 
 </head>
 <script>
-//    function redirectAfterDelay() {
-//        setTimeout(function() {
-//            window.location.href = "/buy-a-ticket";
-//        }, 10000);
-//    }
+    function redirectAfterDelay() {
+        setTimeout(function() {
+            window.location.href = "/buy-a-ticket";
+      //  }, 10000);
+    //}
 </script>
 <body onload="redirectAfterDelay()">
     <div class="thank-you-message">

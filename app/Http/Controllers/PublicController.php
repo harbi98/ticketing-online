@@ -208,7 +208,7 @@ class PublicController extends Controller
         }
         $currentDate = date('y-m-d');
 
-        $tickets = Ticket::select(['id', 'ticket_name', 'price'])->where('id', '=', $request->ticketSelect)->first();
+        $tickets = Ticket::select(['id', 'ticket_name', 'price', 'ticket_type'])->where('id', '=', $request->ticketSelect)->first();
         $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
         for ($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
