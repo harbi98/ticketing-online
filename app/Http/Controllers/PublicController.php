@@ -45,7 +45,6 @@ class PublicController extends Controller
         $currentDate = date('y-m-d');
         $sales = [];
         $ticket = Ticket::find($request->ticket_id);
-        // $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
 
         for ($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
@@ -75,27 +74,18 @@ class PublicController extends Controller
             ];
         }
 
-        $pdf_size = array(0, 0, 349, 573);
-        $mail = new TicketSale($sale);
-        $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sales'))->setPaper($pdf_size);
-        Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
-
-        // $mail = new TicketSale($sale);
         // $pdf_size = array(0, 0, 349, 573);
-        // $qrcode = QrCode::size(250)->generate($sale->ticket_num);
-        // $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sale', 'qrcode'))->setPaper($pdf_size);
-        // $mail->attachData($pdf->output(), $sale->ticket_num . '.pdf');
-        // Mail::to($request->customer_email)->send($mail);
+        // $mail = new TicketSale($sale);
+        // $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sales'))->setPaper($pdf_size);
+        // Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
+
+        $saledb = json_encode($sales);
 
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
         }
-        // return redirect("thank-you")->withSuccess('Thank you for buying a ticket.');
-        // return redirect()->route("index.thank.you.page")->with(['sales' => $sales]);
-        $saledb = json_encode($sales);
-        return view('public.thank-you-page', compact('ticket', 'saledb'));
-        // return view('public.thank-you-page', compact('sales', 'ticket'));
 
+        return view('public.thank-you-page', compact('ticket', 'saledb'));
     }
 
 
@@ -240,15 +230,13 @@ class PublicController extends Controller
         $pdf_size = array(0, 0, 349, 573);
         $mail = new TicketSale($sale);
         $pdf = PDF::loadView('mail.ticket', compact('tickets', 'sales'))->setPaper($pdf_size);
+
         try {
             Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
             return back()->with('status', 'Ticket Purchase Successful');
         } catch (Throwable $e) {
             return back()->with('status', 'Unable to send email. Please try again.');
         }
-
-        // echo Sales::all();
-        // return view('public.confirm-ticket', compact('sales', 'tickets'));
     }
 
     public function purchaseConfirm(Request $request)
@@ -262,8 +250,9 @@ class PublicController extends Controller
         $ticketdb = json_encode($tickets);
 
         return view('public.confirm-ticket', compact('sales', 'tickets'));
-        // return view('public.confirm-ticket', ['sales'=> $sales, 'tickets' => $tickets]);
     }
+
+
     public function scanTicket($ticket_number)
     {
         if ($ticket_number) {

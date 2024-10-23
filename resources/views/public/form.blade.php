@@ -56,8 +56,8 @@
             box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
     </style>
+    
 </head>
-
 <body>
     <div class="form-container">
         <h5 class="text-center mb-4">Buy a Ticket</h5>

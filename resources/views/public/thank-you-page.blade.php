@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -26,16 +25,29 @@
 
 </head>
 <script>
-//    function redirectAfterDelay() {
-//        setTimeout(function() {
-//            window.location.href = "/buy-a-ticket";
-//        }, 10000);
-//    }
+    function disableBack() {
+        window.history.pushState(null, "", window.location.href);
+        window.onpopstate = function () {
+            window.history.pushState(null, "", window.location.href);
+        };
+    }
+    function disableRefresh() {
+        window.addEventListener("beforeunload", function (event) {
+            event.preventDefault();
+            event.returnValue = "";
+        });
+    }
+   function redirectAfterDelay() {
+        setTimeout(function() {
+            disableRefresh();
+           window.location.href = "/buy-a-ticket";
+        }, 5000);
+   }
 </script>
-<body onload="redirectAfterDelay()">
+<body onload="redirectAfterDelay(); disableBack();">
     <div class="thank-you-message">
         <h1>Thank You for Buying a Ticket!</h1>
-        <p>You will be redirected to the buy-a-ticket page in 10 seconds.</p>
+        <p>You will be redirected to the buy-a-ticket page in 5 seconds.</p>
         <div class="spinner-border text-primary" role="status">
             <span class="visually-hidden">Loading...</span>
         </div>
@@ -43,5 +55,4 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
-
 </html>

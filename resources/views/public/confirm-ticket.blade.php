@@ -127,8 +127,7 @@
     }
   </style>
 </head>
-
-<body onload="onloadGTM()">
+<body onload="onloadGTM();">
   <!-- Google Tag Manager (noscript) -->
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DL27PN9"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
