@@ -1,5 +1,5 @@
 <?php
-
+// jamnny
 namespace App\Events;
 
 use App\Models\Sales;
@@ -37,16 +37,23 @@ class SaleCreated implements ShouldBroadcast
             'customer_email' => $this->sale->customer_email,
             'customer_contact' => $this->sale->customer_contact,
             'ticket_id' => $this->sale->ticket_id,
-            'total_price' => $this->calculateTotalPrice($this->sale->ticket_id, $this->sale->customer_quantity),
+            'total_price' => $this->calculateTotalPrice($this->sale->reference_num),
         ];
     }
-
-    protected function calculateTotalPrice($ticketId, $quantity)
+    protected function calculateTotalPrice($referenceNum)
     {
-        // Fetch the ticket price from the tickets table based on ticket_id
-        $ticketPrice = Ticket::where('id', $ticketId)->value('price');
+        $sales = Sales::where('reference_num', $referenceNum)->get();
 
-        // Calculate total price based on the quantity
-        return $ticketPrice !== null ? $ticketPrice * $quantity : 0;
+        $totalPrice = 0;
+
+        foreach ($sales as $sale) {
+            $ticketPrice = Ticket::where('id', $sale->ticket_id)->value('price');
+
+            if ($ticketPrice !== null) {
+                $totalPrice += $ticketPrice;
+            }
+        }
+
+        return $totalPrice;
     }
 }

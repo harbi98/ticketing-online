@@ -222,9 +222,9 @@ class PublicController extends Controller
                 'customer_email' => $request->customer_email,
                 'ticket_quantity' => 1
             ];
-
-            event(new SaleCreated($sale));
         }
+        event(new SaleCreated($sale)); // jamnny
+
         $pdf_size = array(0, 0, 349, 573);
         $mail = new TicketSale($sale);
         $pdf = PDF::loadView('mail.ticket', compact('tickets', 'sales'))->setPaper($pdf_size);
@@ -257,16 +257,19 @@ class PublicController extends Controller
         if ($ticket_number) {
             $scan_ticket = Sales::where('ticket_num', $ticket_number)->first();
 
-            if ($scan_ticket->status == 1) {
-                return response(['message' => 'Ticket Already Scanned', 'ticket' => $scan_ticket], 200);
+            if(Sales::where('ticket_num', $ticket_number)->exists()) {
+                if ($scan_ticket->status == 1) {
+                    return response(['message' => 'Ticket Already Scanned', 'ticket' => $scan_ticket], 200);
+                }
+                $scan_ticket->status = 1;
+                $scan_ticket->save();
+                return response([
+                    'message' => 'Ticket Successfully Scanned',
+                    'ticket' => $scan_ticket
+                ], 200);
+            }else{
+                return response(['message' => 'No Ticket Number Found', 'ticket' => 0], 404);
             }
-
-            $scan_ticket->status = 1;
-            $scan_ticket->save();
-            return response([
-                'message' => 'Ticket Successfully Scanned',
-                'ticket' => $scan_ticket
-            ], 200);
         } else {
             return response(['message' => 'No Ticket Number Found'], 404);
         }

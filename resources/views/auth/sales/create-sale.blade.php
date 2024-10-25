@@ -10,12 +10,6 @@
   </div>
 </div>
 
-
-
-
-
-
-
 <div class="modal fade" id="createTicket" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -26,15 +20,6 @@
       <form id="ticketForm" method="POST" action="{{ route('admin.confirm.ticket') }}">
         <div class="modal-body">
           @csrf
-          <!-- <div class="mb-3">
-            <label for="staticEmail" class="form-label">Select Tickets</label>
-            <select class="form-select" id="ticketSelect" name="ticketSelect" aria-label="Default select example">
-              <option selected>Select a Ticket</option>
-              @foreach ($tickets as $ticket)
-              <option value="{{ $ticket->id }}" data-price="{{ $ticket->price }}">{{ $ticket->ticket_name }}</option>
-              @endforeach
-            </select>
-          </div> -->
           <div class="row mb-3">
             <div class="col-md-6">
               <label for="staticEmail" class="form-label">Select Tickets</label>
@@ -74,6 +59,7 @@
     </div>
   </div>
 </div>
+
 <script>
   document.getElementById('ticketSelect').addEventListener('change', function() {
     var selectedOption = this.options[this.selectedIndex];
@@ -87,6 +73,12 @@
       $("#myTable tr").filter(function() {
         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
       });
+    });
+
+    $("#ticketForm").on("submit", function(event) {
+      event.preventDefault();
+      $('#createTicket').modal('hide');
+      this.submit();
     });
   });
 </script>
