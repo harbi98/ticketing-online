@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SaleCreated;
+use App\Jobs\SendTicketSaleEmail;
 use App\Models\Sales;
 use App\Models\Ticket;
 use Illuminate\Http\Request;
@@ -37,11 +39,7 @@ class PublicController extends Controller
     public function purchaseTicket(Request $request)
     {
         $latest_id = Sales::max('id');
-        if (is_null($latest_id)) {
-            $nextId = 1;
-        } else {
-            $nextId = $latest_id + 1;
-        }
+        $nextId = is_null($latest_id) ? 1 : $latest_id + 1;
         $currentDate = date('y-m-d');
         $sales = [];
         $ticket = Ticket::find($request->ticket_id);
@@ -72,21 +70,33 @@ class PublicController extends Controller
                 'customer_email' => $request->customer_email,
                 'ticket_quantity' => 1
             ];
+            event(new SaleCreated($sale));
         }
 
         $pdf_size = array(0, 0, 349, 573);
         $mail = new TicketSale($sale);
         $pdf = PDF::loadView('mail.ticket', compact('ticket', 'sales'))->setPaper($pdf_size);
+<<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> c0b4370... fixed the double tickets
         Mail::to($request->customer_email)->send($mail->attachData($pdf->output(), 'tickets.pdf'));
 
         $saledb = json_encode($sales);
+=======
+>>>>>>> 2bc416f89936fea7fa449ae9040cdb30ff646c12
 
         if (Auth::check()) {
             return redirect("sales")->withSuccess('Thank you for buying a ticket.');
         }
 
+<<<<<<< HEAD
+=======
+        $saledb = json_encode($sales);
+>>>>>>> 2bc416f89936fea7fa449ae9040cdb30ff646c12
         return view('public.thank-you-page', compact('ticket', 'saledb'));
     }
+
 
 
     public function confirmTicket(Request $request)
@@ -191,15 +201,18 @@ class PublicController extends Controller
     public function adminConfirmTicket(Request $request)
     {
         $latest_id = Sales::max('id');
-        if (is_null($latest_id)) {
-            $nextId = 1;
-        } else {
-            $nextId = $latest_id + 1;
-        }
+        $nextId = is_null($latest_id) ? 1 : $latest_id + 1;
         $currentDate = date('y-m-d');
 
+<<<<<<< HEAD
         $tickets = Ticket::select(['id', 'ticket_name', 'price', 'ticket_type'])->where('id', '=', $request->ticketSelect)->first();
+=======
+        $tickets = Ticket::select(['id', 'ticket_name', 'ticket_type', 'price'])->where('id', '=', $request->ticketSelect)->first();
+>>>>>>> 2bc416f89936fea7fa449ae9040cdb30ff646c12
         $reference_num = 'TBR-GH-PTNM-' . rand(10000, 99999) . '-' . $nextId;
+
+        $sales = []; // Collect sales data for the email
+
         for ($i = 1; $i <= $request->customer_quantity; $i++) {
             $ticket_number = 'TBR-GH-PTNM-' . $nextId . '-' . $currentDate . '-' . $i;
             $sale = Sales::create([
@@ -226,6 +239,7 @@ class PublicController extends Controller
                 'ticket_quantity' => 1
             ];
         }
+        event(new SaleCreated($sale)); // jamnny
 
         $pdf_size = array(0, 0, 349, 573);
         $mail = new TicketSale($sale);
@@ -237,7 +251,13 @@ class PublicController extends Controller
         } catch (Throwable $e) {
             return back()->with('status', 'Unable to send email. Please try again.');
         }
+<<<<<<< HEAD
+=======
+
+        return back()->with('status', 'Ticket Purchase Successful');
+>>>>>>> 2bc416f89936fea7fa449ae9040cdb30ff646c12
     }
+
 
     public function purchaseConfirm(Request $request)
     {
@@ -258,16 +278,39 @@ class PublicController extends Controller
         if ($ticket_number) {
             $scan_ticket = Sales::where('ticket_num', $ticket_number)->first();
 
-            if ($scan_ticket->status == 1) {
-                return response(['message' => 'Ticket has already scanned'], 200);
+            if(Sales::where('ticket_num', $ticket_number)->exists()) {
+                if ($scan_ticket->status == 1) {
+                    return response(['message' => 'Ticket Already Scanned', 'ticket' => $scan_ticket], 200);
+                }
+                $scan_ticket->status = 1;
+                $scan_ticket->save();
+                return response([
+                    'message' => 'Ticket Successfully Scanned',
+                    'ticket' => $scan_ticket
+                ], 200);
+            }else{
+                return response(['message' => 'No Ticket Number Found', 'ticket' => 0], 404);
             }
-
-            $scan_ticket->status = 1;
-            $scan_ticket->save();
-            return response(['message' => 'Ticket Scanned'], 200);
-
         } else {
             return response(['message' => 'No Ticket Number Found'], 404);
         }
+    }
+
+    public function checkTicket($ticket_number)
+    {
+        $scan_ticket = Sales::where('ticket_num', $ticket_number)->first();
+
+        if ($scan_ticket) {
+            return response()->json(['status' => $scan_ticket]);
+        }
+
+        return response()->json(['status' => false]);
+    }
+
+    public function listTickets()
+    {
+        $scannedTickets = Sales::where('status', 1)->get();
+
+        return response()->json($scannedTickets);
     }
 }

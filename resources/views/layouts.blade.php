@@ -25,7 +25,7 @@
         integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <!-- Google tag (gtag.js) -->
+    {{-- <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDTX74RGJJ"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -76,16 +76,20 @@
         <img height="1" width="1" style="display:none"
             src="https://www.facebook.com/tr?id=1207610950311468&ev=PageView&noscript=1" />
     </noscript>
-    <!-- End Meta Pixel Code -->
+    <!-- End Meta Pixel Code --> --}}
 
 </head>
 
 <body>
+    <!-- jamnny -->
+    <div id="loading" style="display: none;">
+        <div class="spinner"></div>
+    </div>
 
-    <!-- Google Tag Manager (noscript) -->
+    {{-- <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DL27PN9" height="0" width="0"
             style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
+    <!-- End Google Tag Manager (noscript) --> --}}
 
     <div class="main {{ Auth::check() ? 'bgin2' : 'bgin' }}">
         <!-- style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{{ URL::asset('assets/index.jpeg') }}'); background-size: cover;" -->
@@ -100,20 +104,20 @@
                     <nav>
                         <ul class="nav nav-custom text-center">
                             @guest
-                                <li class="nav-item me-3"><a href="#" class="nav-link text-white">HOME</a></li>
-                                <li class="nav-item me-3"><a href="#artists" class="nav-link text-white">ARTISTS</a></li>
-                                <li class="nav-item me-3"><a href="#about-event" class="nav-link text-white">ABOUT EVENT</a>
-                                </li>
-                                <li class="nav-item"><a href="{{ route('index.form') }}"
-                                        class="btn btn-outline-light rounded-0 bg-black" style="width: 20vh;">Buy Tickes</a>
-                                </li>
+                            <li class="nav-item me-3"><a href="#" class="nav-link text-white">HOME</a></li>
+                            <li class="nav-item me-3"><a href="#artists" class="nav-link text-white">ARTISTS</a></li>
+                            <li class="nav-item me-3"><a href="#about-event" class="nav-link text-white">ABOUT EVENT</a>
+                            </li>
+                            <li class="nav-item"><a href="{{ route('index.form') }}"
+                                    class="btn btn-outline-light rounded-0 bg-black" style="width: 20vh;">Buy Tickes</a>
+                            </li>
                             @else
-                                <li class="nav-item">
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                                        @csrf
-                                        <button type="submit" class="logout-button btn btn-danger">Logout</button>
-                                    </form>
-                                </li>
+                            <li class="nav-item">
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="logout-button btn btn-danger">Logout</button>
+                                </form>
+                            </li>
                             @endguest
                         </ul>
                     </nav>
@@ -137,3 +141,47 @@
 </body>
 
 </html>
+
+<!-- jamnny -->
+<script>
+    window.addEventListener('load', function() {
+        document.getElementById('loading').style.display = 'none';
+    });
+
+    window.addEventListener('beforeunload', function() {
+        document.getElementById('loading').style.display = 'block';
+    });
+</script>
+
+<!-- jamnny -->
+<style>
+    .spinner {
+        border: 8px solid #f3f3f3;
+        /* Light grey */
+        border-top: 8px solid #3498db;
+        /* Blue */
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    #loading {
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 1000;
+        /* Ensure it’s above other elements */
+    }
+</style>

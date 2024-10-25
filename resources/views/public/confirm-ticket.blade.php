@@ -9,7 +9,7 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-  <!-- Google tag (gtag.js) -->
+  {{-- <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-RDTX74RGJJ"></script>
   <script>
       window.dataLayer = window.dataLayer || [];
@@ -59,7 +59,7 @@
   <noscript>
     <img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1207610950311468&ev=PageView&noscript=1" />
     </noscript>
-  <!-- End Meta Pixel Code -->
+  <!-- End Meta Pixel Code --> --}}
 
   <style>
     body {
@@ -127,12 +127,18 @@
     }
   </style>
 </head>
+<<<<<<< HEAD
 <body onload="onloadGTM();">
   <!-- Google Tag Manager (noscript) -->
+=======
+
+<body onload="onloadGTM()">
+  {{-- <!-- Google Tag Manager (noscript) -->
+>>>>>>> 2bc416f89936fea7fa449ae9040cdb30ff646c12
   <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DL27PN9"
             height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-    <div class="form-container">
+    <!-- End Google Tag Manager (noscript) --> --}}
+  <div class="form-container">
     <h5 class="text-center mb-4">Confirm Ticket</h5>
     <table class="table">
       <tr>
@@ -174,44 +180,69 @@
       <button class="btn btn-primary">Continue</button>
     </form>
   </div>
-  
+
   <div class="footer-text">
     Powered by MediaOne Software Solutions
   </div>
   <script>
-      function onloadGTM() {
-          var response = <?= json_encode($sales)?>;
-          var total_price = 0;
-          const data = [];
+    function onloadGTM() {
+      var response = <?= json_encode($sales) ?>;
+      var total_price = 0;
+      const data = [];
 
-          $.each(response, function(key, value) {
-              // console.log(value);
-              total_price += parseInt(value.ticket_price);
-              data.push({
-                  'ticket_num': value.ticket_num,
-                  'ticket_name': value.ticket_name,
-                  'ticket_type': value.ticket_type,
-                  'ticket_price': value.ticket_price
-              });
-          });
+      $.each(response, function(key, value) {
+        // console.log(value);
+        total_price += parseInt(value.ticket_price);
+        data.push({
+          'ticket_num': value.ticket_num,
+          'ticket_name': value.ticket_name,
+          'ticket_type': value.ticket_type,
+          'ticket_price': value.ticket_price
+        });
+      });
 
-          window.dataLayer = window.dataLayer || [];
-          window.dataLayer.push({
-              'event': 'form_submit_ticket',
-              'ticket_ref_num': response[0].reference_num,
-              'total_purchase': total_price,
-              'total_quantity': response.length,
-              // 'sales_date': response[0].sales_date,
-              'items': data,
-          });
-          
-          window.eventObject = window.dataLayer[5];
-          window.dataLayer.push(window.eventObject);
-      }
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'form_submit_ticket',
+        'ticket_ref_num': response[0].reference_num,
+        'total_purchase': total_price,
+        'total_quantity': response.length,
+        // 'sales_date': response[0].sales_date,
+        'items': data,
+      });
+
+      window.eventObject = window.dataLayer[5];
+      window.dataLayer.push(window.eventObject);
+    }
+  </script>
+
+  @vite('resources/js/app.js')
+  <script src="https://js.pusher.com/7.0/pusher.min.js"></script>
+  <script src="https://js.pusher.com/7.0/echo.js"></script>
+  <script src="https://unpkg.com/laravel-echo/dist/echo.iife.js"></script>
+  <script>
+    const pusher = new Pusher('ce257e8ff96b62b915c8', {
+      cluster: 'ap1',
+      encrypted: true,
+      debug: true
+    });
+
+    // Subscribe to channel
+    const channel = pusher.subscribe('sales');
+    channel.bind('pusher:subscription_succeeded', function() {});
   </script>
 
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+  <script type="text/javascript">
+    window.history.forward();
+
+    function noBack() {
+      window.history.forward();
+    }
+  </script>
+
 </body>
 
 </html>
