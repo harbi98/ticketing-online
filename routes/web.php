@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Graphcontroller;
 use App\Http\Controllers\PublicController;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -28,8 +29,12 @@ Route::get('registration', [AuthController::class, 'registration'])->name('regis
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
+//jam
+Route::get('graph', [Graphcontroller::class, 'graph'])->name('graph');
+
+
 // Pages
-Route::get('sales', [TicketController::class, 'sales'])->name('sales');
+Route::get('sales', [TicketController::class, 'sales'])->name('sales'); //listener for every events
 Route::get('tickets', [TicketController::class, 'tickets'])->name('tickets');
 
 
@@ -55,4 +60,6 @@ Route::get('purchase-confirmation', [PublicController::class, 'purchaseConfirm']
 Route::post('confirm-ticket', [PublicController::class, 'confirmTicket'])->name('index.confirm.ticket');
 Route::prefix('scan')->group(function () {
     Route::get('/ticket/{formNumber}', [PublicController::class, 'scanTicket']);
+    Route::get('/ticket-status/{formNumber}', [PublicController::class, 'checkTicket']);
+    Route::get('/ticket-list', [PublicController::class, 'listTickets']); //jamnny
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\listEvent;
+use App\Events\SaleCreated;
 use App\Models\Ticket;
 use App\Models\Sales;
 use Illuminate\Http\Request;

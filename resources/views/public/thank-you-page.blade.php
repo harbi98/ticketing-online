@@ -24,6 +24,7 @@
     </style>
 
 </head>
+
 <script>
     function disableBack() {
         window.history.pushState(null, "", window.location.href);
@@ -44,7 +45,12 @@
         }, 5000);
    }
 </script>
+<<<<<<< HEAD
 <body onload="redirectAfterDelay(); disableBack();">
+=======
+
+<body onload="redirectAfterDelay()">
+>>>>>>> 2bc416f89936fea7fa449ae9040cdb30ff646c12
     <div class="thank-you-message">
         <h1>Thank You for Buying a Ticket!</h1>
         <p>You will be redirected to the buy-a-ticket page in 5 seconds.</p>
@@ -55,4 +61,26 @@
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
+<<<<<<< HEAD
 </html>
+=======
+
+<!-- jamnny -->
+<script>
+    window.addEventListener('beforeunload', function(e) {
+        e.preventDefault();
+    });
+
+    document.addEventListener('keydown', function(e) {
+        if ((e.key === 'F5') || ((e.ctrlKey || e.metaKey) && e.key === 'r')) {
+            e.preventDefault();
+        }
+    });
+
+    window.addEventListener('popstate', function(event) {
+        history.pushState(null, document.title, location.href);
+    });
+</script>
+
+</html>
+>>>>>>> 2bc416f89936fea7fa449ae9040cdb30ff646c12
